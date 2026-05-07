@@ -687,9 +687,28 @@ function showView(type, el){
   let html = "";
 
   list.forEach((p,i)=>{
-    let images = (p.images || []).map(img => `<img src="${img}">`).join("");
 
-    html += `
+let diff = Date.now() - p.date;
+
+let timeText = "";
+
+let mins = Math.floor(diff / 60000);
+let hours = Math.floor(diff / 3600000);
+let days = Math.floor(diff / 86400000);
+
+if(mins < 60){
+  timeText = mins + " min ago";
+}
+else if(hours < 24){
+  timeText = hours + " hr ago";
+}
+else{
+  timeText = days + " day ago";
+}
+
+let images = (p.images || []).map(img => `<img src="${img}">`).join("");
+
+html += `
       <div class="card">
         <div class="img-wrap">
 
