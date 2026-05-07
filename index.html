@@ -9,7 +9,7 @@ body{
   margin:0;        
   font-family:Arial;        
   background:#f5f5f5;        
-  padding-top:80px;        
+  padding-top:80px;          
 }      /* HEADER */  
 .top-marquee{  
 background:#111;  
@@ -45,7 +45,7 @@ animation:move 12s linear infinite;
 color:white;
 margin-left:120px;
 }
-
+n,.
 @keyframes move{
 0%{transform:translateX(100%);}
 100%{transform:translateX(-100%);}
@@ -123,26 +123,35 @@ z-index:10;
 
 /* CATEGORY */
 .category-bar{
-position:fixed;
-top:45px;
-width:100%;
-height:40px;
-background:#222;
-display:flex;
-overflow-x:auto;
-z-index:2000;
-}
+  position:fixed;
+  top:45px;
+  width:100%;
+  height:45px;
+  display:flex;
+  align-items:center;
+  overflow-x:auto;
+  z-index:2000;
 
+  background: linear-gradient(90deg, #1877F2, #0d5bd7);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+    
 .category-btn{
-color:white;
-padding:6px 14px;
-margin:5px;
-border-radius:20px;
-white-space:nowrap;
-cursor:pointer;
+  color:white;
+  padding:6px 14px;
+  margin:5px;
+  border-radius:18px;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:500;
+  transition:0.2s;
 }
 
-.category-btn.active{background:#25D366;}
+.category-btn.active{
+  background:white;
+  color:#1877F2;
+}
 
 .view{display:none;padding:10px;}
 .active-view{display:block;}
@@ -196,18 +205,23 @@ width:22px;
 height:22px;
 }
 .social-btn{
-display:flex;
-align-items:center;
-gap:6px;
-padding:8px 10px;
-border-radius:20px;
-color:#fff;
-font-size:12px;
-font-weight:500;
-width:auto;
-white-space:nowrap;
-flex-shrink:0; /* prevents squeezing */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
 
+  padding:6px 10px;
+  border-radius:18px;
+
+  color:#fff;
+  font-size:11px;
+  font-weight:500;
+
+  width:fit-content;   /* key fix */
+  max-width:120px;     /* prevents stretching */
+  white-space:nowrap;
+
+  flex-shrink:0;
 }
 
 .social-btn img{
@@ -369,20 +383,39 @@ border:1px solid #ccc;
 }
 
 </style>      
-</head>  <body>  <!-- HEADER -->  <div class="top-marquee">        
-  <img src="logo.jpeg" class="logo">    <div class="marquee-wrapper">        
-    <div class="marquee-text">        
+</head> 
+  <body> 
+ 
+    
+ <!-- HEADER -->  
+ <div class="top-marquee">        
+ <img src="logo.jpeg" class="logo">   
+ <div class="marquee-wrapper">   <div class="marquee-text">        
       ✨ BOB TEXTILE ✨ Premium Fashion Store ✨ Quality Fabrics ✨        
     </div>        
   </div>    <div class="admin-icon" onclick="openAdmin()">🔒</div>        
-</div>        <!-- CATEGORY -->        <div class="category-bar" id="categoryBar"></div>        <!-- VIEWS -->       <div id="aboutView" class="view active-view">        
-  <div class="card">      <!-- TESTIMONIAL -->          <h3 style="text-align:center;">What Our Customers Say 💬</h3>        
+</div>    
+
+ <!-- CATEGORY -->   
+    <div class="category-bar" id="categoryBar"></div>     
+    <!-- VIEWS -->   
+    <div id="aboutView" class="view active-view">        
+  <div class="card">   
+   
+ <!-- TESTIMONIAL -->   
+ <h3 style="text-align:center;">What Our Customers Say 💬</h3>        
 <div class="carousel testimonial-carousel" id="testimonialCarousel"></div>      
 <div class="dots" id="testimonialDots"></div>      
-<hr>      <!-- WELCOME -->      <h2 style="text-align:center;">Welcome to BOB TEXTILE 👋</h2>        
+<hr> 
+    
+ <!-- WELCOME -->   
+ <h2 style="text-align:center;">Welcome to BOB TEXTILE 👋</h2>        
 <p style="text-align:center;">        
   Your trusted destination for premium fabrics, modern fashion styles, and quality textile products across Nigeria.        
-</p>      <hr>      <!-- ABOUT -->      <h3>About Us</h3>        
+</p>      <hr>     
+ 
+  <!-- ABOUT -->    
+    <h3>About Us</h3>        
 <p>        
   BOB TEXTILE is a professional textile brand specializing in high-quality fabrics,        
   traditional attire, and modern fashion designs. We are committed to delivering        
@@ -400,18 +433,32 @@ border:1px solid #ccc;
 </p>      <p><strong>📍 Sokoto</strong><br>        
   • Gidan Yadi, Maiduguri Road, Sokoto<br>        
   • Central Market, Sokoto        
-</p>      <hr>      <!-- CONTACT -->      <h3>Contact & Business Info</h3>        
+</p>      <hr>    
+
+    
+    
+<!-- CONTACT -->   
+<h3>Contact & Business Info</h3>        
 <p>        
   📞 09114738932<br>        
   🕒 Monday – Saturday (9:00AM – 6:00PM)<br>        
   🚚 Nationwide delivery available<br>        
   💬 Fast WhatsApp support        
-</p>      <hr>      <!-- SOCIAL -->      <h3>Connect With Us</h3>      <div style="      
-  display:flex;      
-  gap:10px;      
-  overflow-x:auto;      
-  padding-bottom:5px;      
-">      <a href="https://www.facebook.com/share/17RD54HCzq/" target="_blank" style="text-decoration:none;">        
+</p>      <hr> 
+
+
+    
+ <!-- SOCIAL -->  
+ <h3>Connect With Us</h3>
+  <div style="
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  padding-bottom:5px;
+">   
+    
+    <a href="https://www.facebook.com/share/17RD54HCzq/" target="_blank" style="text-decoration:none;">        
     <div class="social-btn fb">        
       <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">        
       Facebook        
@@ -468,101 +515,98 @@ border:1px solid #ccc;
   <div id="testimonialList"></div>      <hr>      <h3>Add Category</h3>      
   <input id="newCat" placeholder="New category name">      
   <button class="btn" onclick="addCategory()">Add Category</button>      <hr>    <button class="btn" onclick="closeAdmin()" style="background:red;">Close</button>  </div>     
-  <script>          let categories = JSON.parse(localStorage.getItem("categories")) || [
-"shadda",
-"shoes",
-"abayas",
-"yard",
-"bags",
-"caps",
-"vail"
-];
-let products=JSON.parse(localStorage.getItem("products"))||[];
-let uploadedImages=[];
-let adminPanel = document.getElementById("adminPanel");
-let delCat = document.getElementById("delCat");
-let delList = document.getElementById("delList");
-let aName = document.getElementById("aName");
-let aPrice = document.getElementById("aPrice");
-let aCategory = document.getElementById("aCategory");
-let aboutView = document.getElementById("aboutView");
 
-/* add category */
-function addCategory(){
-let newCat = document.getElementById("newCat").value.trim().toLowerCase();
 
-if(!newCat) return;
 
-if(categories.includes(newCat)){
-alert("Category already exists");
-return;
-}
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-categories.push(newCat);
-localStorage.setItem("categories", JSON.stringify(categories));
-
-document.getElementById("newCat").value = "";
-
-loadCategories();
-fillCats();
-}
-
-function loadCategories(){
-let bar = document.getElementById("categoryBar");
-let sel = document.getElementById("aCategory");
-let delSel = document.getElementById("catDelete");
-
-bar.innerHTML = "";
-sel.innerHTML = "";
-delSel.innerHTML = "";
-
-// ABOUT BUTTON
-let aboutBtn = document.createElement("div");
-aboutBtn.className = "category-btn";
-aboutBtn.innerText = "ABOUT";
-aboutBtn.onclick = function () {
-showView("about", aboutBtn);
+// YOUR FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyA6ZaMnWKJEvSUlJgh31tU6rj8CvuietuM",
+  authDomain: "bob-26647.firebaseapp.com",
+  projectId: "bob-26647",
+  storageBucket: "bob-26647.firebasestorage.app",
+  messagingSenderId: "468659293220",
+  appId: "1:468659293220:web:507832347dc70ab78ddcb1"
 };
-bar.appendChild(aboutBtn);
 
-// LOOP CATEGORIES PROPERLY
-categories.forEach(cat => {
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// CATEGORY BUTTON      
-let btn = document.createElement("div");      
-btn.className = "category-btn";      
-btn.innerText = cat.toUpperCase();      
-  
-btn.onclick = function () {      
-  showView(cat, btn);      
-};      
-  
-bar.appendChild(btn);      
-  
-// ADMIN SELECT      
-let opt = document.createElement("option");      
-opt.value = cat;      
-opt.textContent = cat.toUpperCase();      
-sel.appendChild(opt);      
-  
-// DELETE SELECT      
-let opt2 = document.createElement("option");      
-opt2.value = cat;      
-opt2.textContent = cat.toUpperCase();      
-delSel.appendChild(opt2);      
-  
-// CREATE VIEW      
-if (!document.getElementById(cat + "View")) {      
-  let div = document.createElement("div");      
-  div.id = cat + "View";      
-  div.className = "view";      
-  document.body.appendChild(div);      
-}
+// MAKE GLOBAL
+window.db = db;
+window.fb = { collection, addDoc, getDocs, deleteDoc, doc };
+</script>
 
+
+    
+    
+ <script>   
+// Done
+let categories = [];
+let products = [];
+let uploadedImages = [];
+
+let adminPanel, delCat, delList, aName, aPrice, aCategory, aboutView;
+
+document.addEventListener("DOMContentLoaded", () => {
+  adminPanel = document.getElementById("adminPanel");
+  delCat = document.getElementById("delCat");
+  delList = document.getElementById("delList");
+  aName = document.getElementById("aName");
+  aPrice = document.getElementById("aPrice");
+  aCategory = document.getElementById("aCategory");
+  aboutView = document.getElementById("aboutView");
+
+  loadCategoriesFromFirebase();
+  loadProductsFromFirebase();
+  loadTestimonialsFromFirebase();
 });
+
+   
+/* add category */
+  // Done 
+async function addCategory(){
+  let newCat = document.getElementById("newCat").value.trim().toLowerCase();
+
+  if(!newCat) return;
+
+  await fb.addDoc(fb.collection(db, "categories"), {
+    name: newCat
+  });
+
+  document.getElementById("newCat").value = "";
+
+  loadCategoriesFromFirebase();
 }
 
+   
+// LOAD CATEGORIES 
+   // Dome
+async function loadCategoriesFromFirebase(){
+  categories = [];
+
+  const snap = await fb.getDocs(fb.collection(db, "categories"));
+
+  snap.forEach(docItem=>{
+    categories.push({
+      id: docItem.id,
+      name: docItem.data().name
+    });
+  });
+
+  // convert to simple array for your system
+  categories = categories.map(c => c.name);
+
+  loadCategories();
+  fillCats();
+}
+
+ //Done  
 function fillCats(){
+
 let html = categories
 .map(c => `<option value="${c}">${c.toUpperCase()}</option>`)
 .join("");
@@ -570,154 +614,200 @@ let html = categories
 delCat.innerHTML = html;
 
 document.getElementById("catDelete").innerHTML = html;
+
+// ADD THIS
+aCategory.innerHTML = html;
+
 }
+   
+// Done   
+async function deleteCategory(){
+  let cat = document.getElementById("catDelete").value;
 
-function deleteCategory(){
-let cat = document.getElementById("catDelete").value;
+  const snap = await fb.getDocs(fb.collection(db, "categories"));
 
-categories = categories.filter(c=>c!==cat);
-localStorage.setItem("categories", JSON.stringify(categories));
+  snap.forEach(async (d)=>{
+    if(d.data().name === cat){
+      await fb.deleteDoc(fb.doc(db, "categories", d.id));
+    }
+  });
 
-loadCategories();
+  loadCategoriesFromFirebase();
 }
-
+   
 /* VIEW */
-document.querySelectorAll(".view").forEach(v=>{
-v.classList.remove("active-view");
+//Done
+document.querySelectorAll(".view")?.forEach(v=>{
+  v.classList.remove("active-view");
 });
 
+ // DONE
 function showView(type, el){
-// remove active class from all buttons
-document.querySelectorAll(".category-btn").forEach(b=>{
-b.classList.remove("active");
-});
 
-// set active button
-el.classList.add("active");
+  document.querySelectorAll(".category-btn").forEach(b=>{
+    b.classList.remove("active");
+  });
 
-localStorage.setItem("activeView", type);
+  if(el) el.classList.add("active");
 
-// HIDE ALL VIEWS FIRST
-document.querySelectorAll(".view").forEach(v=>{
-v.classList.remove("active-view");
-});
+  localStorage.setItem("activeView", type);
 
-// SHOW ABOUT
-if(type === "about"){
-aboutView.classList.add("active-view");
-return;
+  document.querySelectorAll(".view").forEach(v=>{
+    v.classList.remove("active-view");
+  });
+
+  if(type === "about"){
+    aboutView.classList.add("active-view");
+    return;
+  }
+
+  let view = document.getElementById(type + "View");
+
+  if(!view){
+    view = document.createElement("div");
+    view.id = type + "View";
+    view.className = "view";
+    document.body.appendChild(view);
+  }
+
+  let list = products.filter(p => p.category === type);
+
+  let html = "";
+
+  list.forEach((p,i)=>{
+    let images = (p.images || []).map(img => `<img src="${img}">`).join("");
+
+    html += `
+      <div class="card">
+        <div class="img-wrap">
+          <div class="carousel car${type}${i}">
+            ${images}
+          </div>
+        </div>
+
+        <div class="dots dots${type}${i}"></div>
+
+        <div class="price">₦ ${p.price}</div>
+
+        <button class="buy-btn" onclick="buyNow(${i},'${type}')">
+          BUY NOW
+        </button>
+      </div>
+    `;
+  });
+
+  view.innerHTML = html;
+  view.classList.add("active-view");
+
+  list.forEach((p,i)=>setupCarousel(type,i));
 }
-
-// SHOW PRODUCT CATEGORY
-let view = document.getElementById(type + "View");
-
-// ALWAYS ensure view exists
-if(!view){
-view = document.createElement("div");
-view.id = type + "View";
-view.className = "view";
-document.body.appendChild(view);
-}
-
-let list = products.filter(p => p.category === type);
-let html = "";
-
-list.forEach((p,i)=>{
-let isNew = (Date.now() - p.date) < 86400000;
-
-html += `
-
-  <div class="card">      
-    <div class="img-wrap">      
-      ${isNew ? '<div class="new-badge">NEW</div>' : ''}      <div class="carousel car${type}${i}">      
-    ${p.images.map(img=>`<img src="${img}">`).join('')}      
-  </div>      
-</div>      
-  
-<div class="dots dots${type}${i}"></div>      
-  
-<div class="price">₦ ${p.price}</div>      
-  
-<button class="buy-btn" onclick="buyNow(${i},'${type}')">      
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">      
-  BUY NOW      
-</button>
-
-  </div>`;      
-});      view.innerHTML = html;
-view.classList.add("active-view");
-
-list.forEach((p,i)=>setupCarousel(type,i));
-}
+// DONE
 /* BUY NOW */
-function buyNow(i,type){
-let list=products.filter(p=>p.category===type);
-let p=list[i];
+function buyNow(i, type){
+  // get product safely
+  const list = products.filter(p => p.category === type);
+  const p = list[i];
+  if (!p) return;
 
-let car=document.querySelector(".car"+type+i);
-let index=Math.round(car.scrollLeft/car.clientWidth);
-let img=p.images[index];
+  // get carousel (may not exist)
+  const car = document.querySelector(".car" + type + i);
 
-let msg=`Hello 👋,
+  // safe index calculation
+  let index = 0;
+  if (car && car.clientWidth > 0) {
+    index = Math.round(car.scrollLeft / car.clientWidth);
+  }
+
+  // safe image selection
+  const images = Array.isArray(p.images) ? p.images : [];
+  const img = images[index] || images[0] || "No image";
+
+  // build message
+  const msg = `Hello 👋,
 
 I want to order this Product:
 
 🧵 Category: ${type.toUpperCase()}
-🛍️ Product: ${p.name}
-💰 Price: ₦${p.price}
+🛍️ Product: ${p.name || "N/A"}
+💰 Price: ₦${p.price || "N/A"}
 
 🖼️ Selected Image:
 ${img}
 
 Is this available? I want to buy.`;
 
-window.open("https://wa.me/2349114738932?text="+encodeURIComponent(msg));
+  // open WhatsApp
+  window.open(
+    "https://wa.me/2349114738932?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 }
-
+   
+// DONE
 /* CAROUSEL */
 function setupCarousel(type,i){
-let c=document.querySelector(".car"+type+i);
-let box=document.querySelector(".dots"+type+i);
-if(!c)return;
+let c = document.querySelector(".car"+type+i);
+let box = document.querySelector(".dots"+type+i);
 
-let imgs=c.querySelectorAll("img");
-box.innerHTML="";
+if(!c || !box) return; // ✅ prevent crash
 
+let imgs = c.querySelectorAll("img");
+box.innerHTML = "";
+
+// create dots
 imgs.forEach((_,x)=>{
-let d=document.createElement("span");
-d.className="dot";
-if(x===0)d.classList.add("active");
-box.appendChild(d);
+  let d = document.createElement("span");
+  d.className = "dot";
+  if(x===0) d.classList.add("active");
+  box.appendChild(d);
 });
 
-let dots=box.querySelectorAll(".dot");
+let dots = box.querySelectorAll(".dot");
 
-c.addEventListener("scroll",()=>{
-let index=Math.round(c.scrollLeft/c.clientWidth);
-dots.forEach(d=>d.classList.remove("active"));
-if(dots[index])dots[index].classList.add("active");
-});
+// ✅ prevent multiple listeners
+c.onscroll = () => {
+  if(c.clientWidth === 0) return;
+
+  let index = Math.round(c.scrollLeft / c.clientWidth);
+
+  dots.forEach(d=>d.classList.remove("active"));
+  if(dots[index]) dots[index].classList.add("active");
+};
 }
 
+// DONE
 /* ADMIN */
 function openAdmin(){
-  if(prompt("Password")==="1234"){
-    adminPanel.style.display="flex"; // show as flex only when opened
-    fillCats();
-    loadTestimonialAdmin();
+
+  const pass = prompt("Enter admin password:");
+
+  if(!pass) return;
+
+  if(pass === "1234"){   // you can replace later with Firebase auth
+    
+    if(adminPanel) adminPanel.style.display = "flex";
+
+    if(typeof fillCats === "function") fillCats();
+    if(typeof loadTestimonialAdmin === "function") loadTestimonialAdmin();
+
+  } else {
+    alert("Wrong password");
   }
 }
+ 
 
-function closeAdmin(){
-adminPanel.style.display="none";
-}
-
+// Done   
 /* UPLOAD */
 function uploadImage(){
   if (typeof cloudinary === "undefined") {
     alert("Upload tool not loaded. Refresh page.");
     return;
   }
+
+  // ✅ clear previous images (optional but recommended)
+  uploadedImages = [];
+
+  alert("Opening upload...");
 
   cloudinary.openUploadWidget({
     cloudName: "db92r6j9z",
@@ -734,258 +824,369 @@ function uploadImage(){
 
     if (result && result.event === "success") {
       uploadedImages.push(result.info.secure_url);
-
-      // ✅ SHOW FEEDBACK
-      alert("Image uploaded successfully!");
       console.log("Uploaded:", result.info.secure_url);
     }
+
+    // ✅ show ONE message when upload closes
+    if (result && result.event === "close") {
+      if(uploadedImages.length > 0){
+        alert(uploadedImages.length + " image(s) uploaded successfully!");
+      }
+    }
+
   });
 }
+   
 /* SAVE */
+// DONE
+   
+function loadCategories(){
 
+  let bar = document.getElementById("categoryBar");
+
+  if(!bar) return;
+
+  // ABOUT BUTTON FIRST
+  let html = `
+    <div class="category-btn active"
+         onclick="showView('about', this)">
+      HOME
+    </div>
+  `;
+
+  // PRODUCT CATEGORIES
+  categories.forEach(c => {
+    html += `
+      <div class="category-btn"
+           onclick="showView('${c}', this)">
+        ${c.toUpperCase()}
+      </div>
+    `;
+  });
+
+  bar.innerHTML = html;
+}
+
+   
+// DONE   
 /* DELETE */
 function loadDelete(){
 let cat = delCat.value;
 let html = "";
 
-products.forEach((p,i)=>{
-if(p.category === cat){
+// filter first
+let filtered = products.filter(p => p.category === cat);
+
+filtered.forEach((p,i)=>{
+
+let img = (p.images && p.images.length > 0) ? p.images[0] : "";
+
 html += `
 <div class="admin-item">
-  <img src="${p.images[0]}" width="40">
-  <div style="flex:1">${p.name}</div>
+  <img src="${img}" width="40">
+  <div style="flex:1">${p.name || "No name"}</div>
   <button class="delete-btn" onclick="delProduct(${i})">Delete</button>
 </div>`;
-}
 });
 
-delList.innerHTML = html;
+if(delList) delList.innerHTML = html;
 }
 
-function delProduct(i){
+// DONE
+async function delProduct(i){
   let cat = delCat.value;
 
   let filtered = products.filter(p => p.category === cat);
   let productToDelete = filtered[i];
 
-  products = products.filter(p => p !== productToDelete);
+  await fb.deleteDoc(fb.doc(db, "products", productToDelete.id));
 
-  localStorage.setItem("products", JSON.stringify(products));
-
-  loadDelete();
-  showView(cat, document.querySelector(".category-btn.active"));
+  loadProductsFromFirebase();
 }
 
-function deleteTestimonial(i){
-let list = JSON.parse(localStorage.getItem("testimonials")) || [];
 
-// remove item
-list.splice(i, 1);
+// DONE  
+async function deleteTestimonial(i){
+  let item = testimonials[i];
 
-// save back to storage
-localStorage.setItem("testimonials", JSON.stringify(list));
+  const snap = await fb.getDocs(fb.collection(db, "testimonials"));
 
-// update global variable
-testimonials = list;
+  snap.forEach(async (d)=>{
+    if(d.data().url === item){
+      await fb.deleteDoc(fb.doc(db, "testimonials", d.id));
+    }
+  });
 
-// refresh BOTH UI sections
-loadTestimonials();
-loadTestimonialAdmin();
+  loadTestimonialsFromFirebase();
+  loadTestimonialAdmin();
 }
+
+ // DONE  
 function del(i){
 let cat = delCat.value;
 
-// find products in selected category
 let filtered = products.filter(p => p.category === cat);
-
-// get the real product to delete
 let productToDelete = filtered[i];
 
-// remove from main array
+if(!productToDelete) return; // ✅ safety
+
 products = products.filter(p => p !== productToDelete);
 
-// save to storage
 localStorage.setItem("products", JSON.stringify(products));
 
-// refresh UI
 loadDelete();
-}
+}  
 
-let testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
+let testimonials = [];
 let tIndex = 0;
-let tAuto;
+let tAuto = null;
 
+// DONE   
 /* LOAD */
-function loadTestimonials() {
-const box = document.getElementById("testimonialCarousel");
-const dots = document.getElementById("testimonialDots");
+async function loadTestimonialsFromFirebase(){
+  testimonials = [];
 
-box.innerHTML = "";
-dots.innerHTML = "";
+  const snap = await fb.getDocs(fb.collection(db, "testimonials"));
 
-if (testimonials.length === 0) {
-box.innerHTML = `<p style="text-align:center;color:#777;">No testimonials yet</p>`;
-return;
+  snap.forEach(docItem=>{
+    testimonials.push({
+      id: docItem.id,
+      url: docItem.data().url
+    });
+  });
+
+  // convert to simple array
+  testimonials = testimonials.map(t => t.url);
+
+  loadTestimonials();
 }
 
-testimonials.forEach((img, i) => {
-box.innerHTML += `<img src="${img}">`;
+function loadTestimonials(){
 
-let dot = document.createElement("span");      
-dot.className = "dot" + (i === 0 ? " active" : "");      
-dot.onclick = () => scrollTestimonial(i);      
-dots.appendChild(dot);
+  let box = document.getElementById("testimonialCarousel");
+  let dots = document.getElementById("testimonialDots");
 
-});
+  if(!box || !dots) return;
 
-startAuto();
+  // CREATE IMAGES
+  box.innerHTML = testimonials.map(img => `
+    <img src="${img}">
+  `).join("");
 
-scrollTestimonial(0); // ✅ IMPORTANT FIX
+  // CREATE DOTS
+  dots.innerHTML = testimonials.map((_,i)=>`
+    <span class="dot ${i===0 ? 'active' : ''}"
+          onclick="scrollTestimonial(${i})">
+    </span>
+  `).join("");
+
+  // RESET INDEX
+  tIndex = 0;
+
+  // START AUTO SLIDE
+  startAuto();
 }
 
 /* SCROLL */
+// DONE
 function scrollTestimonial(i) {
 const box = document.getElementById("testimonialCarousel");
 const dots = document.querySelectorAll("#testimonialDots .dot");
 
+if(!box) return; // ✅ safety
+
+// clamp index within range
+if(i < 0) i = 0;
+if(i >= dots.length) i = dots.length - 1;
+
+// prevent divide/scroll issues
+if(box.clientWidth === 0) return;
+
 box.scrollTo({
-left: box.clientWidth * i,
-behavior: "smooth"
+  left: box.clientWidth * i,
+  behavior: "smooth"
 });
 
+// update dots
 dots.forEach(d => d.classList.remove("active"));
 if (dots[i]) dots[i].classList.add("active");
 
+// update index
 tIndex = i;
 }
-
+   
+// DONE
 /* AUTO SLIDE */
 function startAuto() {
 clearInterval(tAuto);
 
-if (testimonials.length <= 1) return;
+// safety check
+if (!Array.isArray(testimonials) || testimonials.length <= 1) return;
 
 tAuto = setInterval(() => {
-tIndex = (tIndex + 1) % testimonials.length;
-scrollTestimonial(tIndex);
+
+  // ensure index stays valid
+  tIndex = (tIndex + 1) % testimonials.length;
+
+  // safe call
+  if (typeof scrollTestimonial === "function") {
+    scrollTestimonial(tIndex);
+  }
+
 }, 4000);
 }
-
+   
+// DONE. 
 function restoreActiveView(){
-let saved = localStorage.getItem("activeView") || "about";
 
-if(saved === "about"){
-document.querySelectorAll(".view").forEach(v=>{
-v.classList.remove("active-view");
-});
-aboutView.classList.add("active-view");
-return;
+  let saved = localStorage.getItem("activeView") || "about";
+
+  // REMOVE ACTIVE FROM ALL BUTTONS
+  document.querySelectorAll(".category-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  // HIDE ALL VIEWS
+  document.querySelectorAll(".view").forEach(v=>{
+    v.classList.remove("active-view");
+  });
+
+  // HOME / ABOUT DEFAULT
+  if(saved === "about"){
+
+    aboutView.classList.add("active-view");
+
+    let homeBtn = document.querySelector(".category-btn");
+
+    if(homeBtn){
+      homeBtn.classList.add("active");
+    }
+
+    return;
+  }
+
+  // OTHER CATEGORIES
+  let buttons = document.querySelectorAll(".category-btn");
+
+  buttons.forEach(btn=>{
+
+    if(btn.innerText.trim().toLowerCase() === saved){
+
+      showView(saved, btn);
+
+    }
+
+  });
+
 }
 
-let buttons = document.querySelectorAll(".category-btn");
+   
+// Done
+  function initApp(){
+  loadCategoriesFromFirebase();
+  loadProductsFromFirebase();
+  loadTestimonialsFromFirebase();
 
-buttons.forEach(btn=>{
-if(btn.innerText.toLowerCase() === saved){
-showView(saved, btn);
+  setTimeout(()=>{
+    loadCategories();
+    restoreActiveView();
+  }, 200);
+} // ✅ CLOSE FUNCTION PROPERLY
+
+
+ // DONE  
+async function loadProductsFromFirebase(){
+
+  products = [];
+
+  // CLEAR OLD CATEGORY VIEWS
+  document.querySelectorAll(".view").forEach(v=>{
+
+    if(v.id !== "aboutView"){
+      v.innerHTML = "";
+    }
+
+  });
+
+  const querySnapshot = await fb.getDocs(
+    fb.collection(db, "products")
+  );
+
+  querySnapshot.forEach((docItem)=>{
+
+    products.push({
+      id: docItem.id,
+      ...docItem.data()
+    });
+
+  });
+
+  restoreActiveView();
 }
-});
-}
-
-function initApp(){
-loadTestimonials();
-restoreActiveView();
-fillCats();
-}
-
-document.addEventListener("DOMContentLoaded", ()=>{    
-  loadCategories();    
-  fillCats();    
-  loadTestimonials();    
-
-  setTimeout(() => {
-    restoreActiveView();   // delay ensures categories exist
-  }, 100);
-});
+   
 
 function loadTestimonialAdmin(){
-let list = JSON.parse(localStorage.getItem("testimonials")) || [];
 let box = document.getElementById("testimonialList");
 
 let html = "";
 
-list.forEach((img,i)=>{
+testimonials.forEach((img,i)=>{
 html += `
 <div class="testimonial-item">
   <img src="${img}">
   <div style="flex:1">Testimonial ${i+1}</div>
   <button class="delete-btn" onclick="deleteTestimonial(${i})">Delete</button>
 </div>`;
-             
-    });
+});
 
 box.innerHTML = html;
 }
     
 function uploadTestimonials(){
+alert("Uploading testimonial...");
 cloudinary.openUploadWidget({
 cloudName:"db92r6j9z",
 uploadPreset:"ummuhalti",
 multiple:true
-}, (error, result) => {
+}, async (error, result) => {
 
-if(error){      
-  console.log("Upload error:", error);      
-  return;      
-}      
-  
-if(result && result.event === "success"){      
-  // get current list      
-  let list = JSON.parse(localStorage.getItem("testimonials")) || [];      
-  
-  // add new image      
-  list.push(result.info.secure_url);      
-  
-  // save immediately      
-  localStorage.setItem("testimonials", JSON.stringify(list));      
-  
-  // update global      
-  testimonials = list;      
-  
-  // refresh UI instantly      
-  loadTestimonials();      
-  loadTestimonialAdmin();      
+if(error) return;
+
+if(result && result.event === "success"){
+
+  await fb.addDoc(fb.collection(db, "testimonials"), {
+    url: result.info.secure_url
+  });
+
+  loadTestimonialsFromFirebase();
+  loadTestimonialAdmin();
 }
 
 });
 }
-
-function addProduct(){
+async function addProduct(){
   if(uploadedImages.length === 0){
     alert("Upload images first");
     return;
   }
 
-  products.unshift({
+  let newProduct = {
     name: aName.value,
     price: aPrice.value,
     category: aCategory.value.toLowerCase(),
     images: [...uploadedImages],
     date: Date.now()
-  });
+  };
 
-  localStorage.setItem("products", JSON.stringify(products));
+  await fb.addDoc(fb.collection(db, "products"), newProduct);
 
   uploadedImages = [];
   aName.value = "";
   aPrice.value = "";
 
-  loadDelete();
+  alert("Product saved globally ✅");
 
-  // ✅ IMPORTANT: refresh current category view
-  let activeBtn = document.querySelector(".category-btn.active");
-  if(activeBtn){
-    showView(aCategory.value.toLowerCase(), activeBtn);
-  }
+  loadProductsFromFirebase();
 }
 
 </script> 
