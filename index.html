@@ -47,8 +47,10 @@
     .btn{width:100%;padding:10px;background:green;color:white;border:none;margin-top:5px;cursor:pointer}
     .admin-item,.testimonial-item{display:flex;align-items:center;gap:10px;background:#f2f2f2;padding:8px;margin:5px 0;border-radius:6px}
     .delete-btn{background:red;color:white;border:none;padding:6px;cursor:pointer}
-    .testimonial-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:12px}
-    .testimonial-carousel img{min-width:100%;height:380px;object-fit:contain;scroll-snap-align:center;background:white;border-radius:12px}
+    /* Testimonials should fit the image naturally, not inherit the tall 9:16 product-video frame. */
+    .testimonial-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:12px;aspect-ratio:auto;height:auto;margin-bottom:0;padding-bottom:0}
+    .testimonial-carousel img{display:block;flex:0 0 100%;width:100%;min-width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;scroll-snap-align:start;background:white;border-radius:12px}
+    #testimonialDots{margin-top:2px;margin-bottom:0;line-height:8px}
     .testimonial-item img{width:40px;height:40px;object-fit:cover;border-radius:5px}
     .fb{background:#1877F2}.wa{background:#25D366}
     .carousel,.video-container{margin-top:0!important}
@@ -57,7 +59,7 @@
 </head>
 <body>
   <div class="top-marquee">
-    <img src="logo1.jpg" class="logo" alt="Bob Textile Gusau logo">
+    <img src="logo.png" class="logo" alt="Bob Textile Gusau logo">
     <div class="marquee-wrapper"><div class="marquee-text">BOB TEXTILE GUSAU 🧵 • PREMIUM TEXTILE QUALITY • ELEGANT FABRICS • STYLE AND QUALITY YOU CAN TRUST •</div></div>
     <div class="admin-icon" onclick="openAdmin()" aria-label="Open admin login" title="Admin login">🔒</div>
   </div>
