@@ -57,7 +57,7 @@
 </head>
 <body>
   <div class="top-marquee">
-    <img src="logo1.jpg" class="logo" alt="Bob Textile Gusau logo">
+    <img src="logo.png" class="logo" alt="Bob Textile Gusau logo">
     <div class="marquee-wrapper"><div class="marquee-text">BOB TEXTILE GUSAU 🧵 • PREMIUM TEXTILE QUALITY • ELEGANT FABRICS • STYLE AND QUALITY YOU CAN TRUST •</div></div>
     <div class="admin-icon" onclick="openAdmin()" aria-label="Open admin login" title="Admin login">🔒</div>
   </div>
@@ -83,12 +83,13 @@
       <hr>
       <h3>Contact & Business Info</h3>
       <p>💬 WhatsApp orders and enquiries<br>🧵 Fabrics, lace, Ankara and men's materials<br>👞 Shoes and fashion accessories<br>🚚 Ask us about available delivery options</p>
-      <p class="muted-note">Update the business phone number, exact address, opening hours and social media links when they are confirmed.</p>
+      <p>📞 Call us: <a href="tel:+2348137765772">+234 813 776 5772</a></p>
       <hr>
       <h3>Connect With Us</h3>
       <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-bottom:5px">
         <a href="https://www.facebook.com/" target="_blank" rel="noopener" style="text-decoration:none"><div class="social-btn fb"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="">Facebook</div></a>
-        <a href="#" onclick="contactWhatsApp();return false" style="text-decoration:none"><div class="social-btn wa"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="">WhatsApp</div></a>
+        <a href="https://wa.me/2348137765772" target="_blank" rel="noopener" style="text-decoration:none"><div class="social-btn wa"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="">WhatsApp</div></a>
+        <a href="tel:+2348137765772" style="text-decoration:none"><div class="social-btn"><span aria-hidden="true">📞</span> Call Us</div></a>
       </div>
     </div>
   </div>
@@ -162,7 +163,7 @@ let tIndex = 0;
 let tAuto = null;
 let adminPanel, delCat, delList, aName, aCategory, aboutView;
 
-const WHATSAPP_NUMBER = ""; // Add the store's WhatsApp number in international format, digits only, e.g. 2348012345678.
+const WHATSAPP_NUMBER = "2348137765772"; // BOB TEXTILE GUSAU WhatsApp and call number.
 const DEFAULT_CATEGORIES = [
   "fabrics", "lace fabrics", "ankara fabrics", "senator materials",
   "mens fabrics", "womens fabrics", "shoes", "fashion accessories"
@@ -180,16 +181,38 @@ async function initApp() {
 
   try {
     await waitForFirebase();
-    await loadCategoriesFromFirebase();
-    await loadProductsFromFirebase();
-    await loadTestimonialsFromFirebase();
-    loadCategories();
-    restoreActiveView();
-    console.log("BOB TEXTILE GUSAU loaded successfully.");
   } catch (error) {
-    console.error("Firebase startup error:", error);
+    console.error("Firebase initialization error:", error);
     showFirebaseError(error);
+    return;
   }
+  try {
+    await loadCategoriesFromFirebase();
+  } catch (error) {
+    console.error("Could not load categories from Firestore:", error);
+    categories = [...DEFAULT_CATEGORIES];
+    loadCategories();
+    fillCats();
+    showFirebaseError(error, "Categories are temporary until Firestore access is fixed.");
+  }
+  try {
+    await loadProductsFromFirebase();
+  } catch (error) {
+    console.error("Could not load products from Firestore:", error);
+    products = [];
+    showFirebaseError(error, "Products could not load. Check Firestore database and rules.");
+  }
+  try {
+    await loadTestimonialsFromFirebase();
+  } catch (error) {
+    console.error("Could not load testimonials from Firestore:", error);
+    testimonials = [];
+    loadTestimonials();
+    showFirebaseError(error, "Testimonials could not load. Check Firestore database and rules.");
+  }
+  loadCategories();
+  restoreActiveView();
+  console.log("BOB TEXTILE GUSAU storefront initialized.");
 }
 
 function waitForFirebase(timeout = 10000) {
@@ -200,10 +223,24 @@ function waitForFirebase(timeout = 10000) {
   });
 }
 
-function showFirebaseError(error) {
+function showFirebaseError(error, detail = "") {
   const bar = document.getElementById("categoryBar");
   if (bar) {
-    bar.innerHTML = `<div class="category-btn active" onclick="location.reload()">HOME</div><div style="color:white;font-size:11px;padding:6px 8px;white-space:nowrap">Firebase connection error — check setup and refresh</div>`;
+    let message = "Firebase issue";
+    const code = String(error?.code || "");
+    if (code.includes("permission-denied") || code.includes("unauthorized")) message = "Firestore permission denied — update Firebase Rules";
+    else if (code.includes("unavailable") || code.includes("network")) message = "Network/Firebase unavailable — check internet and project setup";
+    else if (code.includes("not-found")) message = "Firestore database not found — create Cloud Firestore";
+    else if (error?.message) message = error.message;
+    const text = [message, detail].filter(Boolean).join(" • ");
+    let status = document.getElementById("firebaseStatus");
+    if (!status) {
+      status = document.createElement("div");
+      status.id = "firebaseStatus";
+      status.style.cssText = "color:white;font-size:11px;padding:6px 8px;white-space:nowrap";
+      bar.appendChild(status);
+    }
+    status.textContent = text;
   }
   console.error("Firebase error:", error?.code || "unknown", error?.message || error);
 }
@@ -444,6 +481,14 @@ function toggleVideoSound(button) {
   }
 }
 
+function contactWhatsApp() {
+  if (!WHATSAPP_NUMBER) {
+    alert("Please add the store WhatsApp number in WHATSAPP_NUMBER in index.html.");
+    return;
+  }
+  window.open("https://wa.me/" + WHATSAPP_NUMBER, "_blank", "noopener");
+}
+
 function buyNow(i, type) {
   const list = products.filter(p => String(p.category || "").toLowerCase() === String(type || "").toLowerCase());
   const product = list[i];
@@ -458,7 +503,7 @@ function buyNow(i, type) {
     alert("Please set the store WhatsApp number in the WHATSAPP_NUMBER setting in index.html before enabling orders.");
     return;
   }
-  window.open("https://wa.me/"+2348137765772"?text=" + encodeURIComponent(message), "_blank", "noopener");
+  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message), "_blank", "noopener");
 }
 
 async function openAdmin() {
