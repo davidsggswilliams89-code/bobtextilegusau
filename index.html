@@ -42,7 +42,7 @@
     .dots{text-align:center;margin-top:5px}
     .dot{height:8px;width:8px;margin:0 3px;background:#bbb;border-radius:50%;display:inline-block}
     .dot.active{background:#25D366}
-    .buy-btn{background:#25D366;color:white;border:none;width:100%;padding:9px;margin-top:6px;border-radius:10px;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
+    .buy-btn,.price-btn{box-sizing:border-box;width:100%;min-height:40px;padding:9px;margin-top:6px;border-radius:10px;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;text-align:center;gap:10px;cursor:pointer}.buy-btn{background:#25D366;color:white;border:none}.price-btn{background:#000;color:#fff;border:1px solid #000;cursor:default}
     input,select{width:100%;max-width:320px;padding:10px;margin:5px 0;box-sizing:border-box}
     .btn{width:100%;padding:10px;background:green;color:white;border:none;margin-top:5px;cursor:pointer}
     .admin-item,.testimonial-item{display:flex;align-items:center;gap:10px;background:#f2f2f2;padding:8px;margin:5px 0;border-radius:6px}
@@ -59,7 +59,7 @@
 </head>
 <body>
   <div class="top-marquee">
-    <img src="logo1.jpg" class="logo" alt="Bob Textile Gusau logo">
+    <img src="logo.png" class="logo" alt="Bob Textile Gusau logo">
     <div class="marquee-wrapper"><div class="marquee-text">BOB TEXTILE GUSAU 🧵 • PREMIUM TEXTILE QUALITY • ELEGANT FABRICS • STYLE AND QUALITY YOU CAN TRUST •</div></div>
     <div class="admin-icon" onclick="openAdmin()" aria-label="Open admin login" title="Admin login">🔒</div>
   </div>
@@ -100,6 +100,7 @@
     <h3>BOB TEXTILE GUSAU — Admin Panel</h3>
     <p class="muted-note">Add fabrics, shoes and accessories to your store.</p>
     <div class="form-group"><label for="aName">Product Name</label><input id="aName" placeholder="e.g. Premium Lace Fabric"></div>
+    <div class="form-group"><label for="aPrice">Product Price (₦)</label><input id="aPrice" type="number" min="1100" step="1" inputmode="numeric" placeholder="e.g. 2000"></div>
     <div class="form-group"><label for="aCategory">Category</label><select id="aCategory"></select></div>
     <button class="btn" onclick="uploadMedia()">📷🎥 Upload Images / Videos</button>
     <p id="uploadStatus" class="muted-note">No media selected yet.</p>
@@ -163,7 +164,7 @@ let uploadedVideos = [];
 let testimonials = [];
 let tIndex = 0;
 let tAuto = null;
-let adminPanel, delCat, delList, aName, aCategory, aboutView;
+let adminPanel, delCat, delList, aName, aPrice, aCategory, aboutView;
 
 const WHATSAPP_NUMBER = "2348137765772"; // BOB TEXTILE GUSAU WhatsApp and call number.
 const DEFAULT_CATEGORIES = [
@@ -178,6 +179,7 @@ async function initApp() {
   delCat = document.getElementById("delCat");
   delList = document.getElementById("delList");
   aName = document.getElementById("aName");
+  aPrice = document.getElementById("aPrice");
   aCategory = document.getElementById("aCategory");
   aboutView = document.getElementById("aboutView");
 
@@ -261,6 +263,16 @@ function normalizeArray(value) {
   return [];
 }
 
+function parsePrice(value) {
+  if (value === undefined || value === null || value === "") return 0;
+  const parsed = Number(String(value).replace(/[^0-9.]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatNaira(value) {
+  return "₦" + parsePrice(value).toLocaleString("en-NG", { maximumFractionDigits: 0 });
+}
+
 function normalizeProduct(docItem) {
   const data = docItem.data() || {};
   let images = normalizeArray(getDataValue(data, ["images","imageUrls","imageURLs","imageUrl","image","photo","photos"]));
@@ -280,6 +292,7 @@ function normalizeProduct(docItem) {
   return {
     id: docItem.id, ...data,
     name: String(getDataValue(data, ["name","productName","title"]) || "Textile Product"),
+    price: parsePrice(getDataValue(data, ["price","productPrice","amount"])),
     category: String(getDataValue(data, ["category","cat","categoryName"]) || "").trim().toLowerCase(),
     images, videos,
     date: Number(getDataValue(data, ["date","createdAt","timestamp"]) || 0)
@@ -402,7 +415,7 @@ function showView(type, el) {
     const media = buildMedia(p);
     const carouselId = `car-${safe}-${i}`;
     const dotsId = `dots-${safe}-${i}`;
-    return `<div class="card"><div class="img-wrap">${isNewProduct(p) ? '<div class="new-badge">NEW</div>' : ''}<div class="carousel" id="${carouselId}">${media}</div></div><div class="dots" id="${dotsId}"></div><button class="buy-btn" onclick="buyNow(${i}, '${escapeAttr(type)}')">ENQUIRE / BUY NOW</button></div>`;
+    return `<div class="card"><div class="img-wrap">${isNewProduct(p) ? '<div class="new-badge">NEW</div>' : ''}<div class="carousel" id="${carouselId}">${media}</div></div><div class="dots" id="${dotsId}"></div><div class="price-btn" aria-label="Product price">${formatNaira(p.price)}</div><button class="buy-btn" onclick="buyNow(${i}, '${escapeAttr(type)}')">ENQUIRE / BUY NOW</button></div>`;
   }).join("") : `<div class="card"><h3 style="text-align:center">${escapeHtml(type.toUpperCase())}</h3><p style="text-align:center">No products uploaded yet. Please check back soon.</p></div>`;
   view.classList.add("active-view");
   list.forEach((p, i) => {
@@ -565,18 +578,21 @@ function uploadMedia() {
 
 async function addProduct() {
   const name = aName.value.trim();
+  const price = parsePrice(aPrice.value);
   const category = aCategory.value.trim().toLowerCase();
   if (!name) return alert("Please enter a product name.");
+  if (!aPrice.value.trim() || price < 1100) return alert("Please enter a product price of at least ₦1,100.");
   if (!category) return alert("Please select a category.");
   if (!uploadedImages.length && !uploadedVideos.length) return alert("Upload at least one image or video first.");
   try {
     await fb.addDoc(fb.collection(db, "products"), {
-      name, category, images: [...uploadedImages], videos: [...uploadedVideos],
+      name, price, category, images: [...uploadedImages], videos: [...uploadedVideos],
       mediaType: "mixed", date: Date.now()
     });
     uploadedImages = [];
     uploadedVideos = [];
     aName.value = "";
+    aPrice.value = "";
     document.getElementById("uploadStatus").textContent = "No media selected yet.";
     alert("Product saved successfully ✅");
     await loadProductsFromFirebase();
