@@ -1,537 +1,133 @@
 <!DOCTYPE html>
-<html>     
-<head>       
-  <title>SWEN ONLINE SHOPPING</title>        
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script> 
-  <style>        
-body{        
-  margin:0;        
-  font-family:Arial;        
-  background:#f5f5f5;        
-  padding-top:80px;          
-}      /* HEADER */  
-.top-marquee{  
-background:#111;  
-position:fixed;  
-top:0;  
-width:100%;  
-height:45px;  
-display:flex;  
-align-items:center;  
-overflow:hidden;  
-z-index:3000;  
-}  /* LOGO */
-.logo{
-height:45px;
-margin:0;
-padding:0;
-object-fit:contain;
-background:#111;
-z-index:10;
-}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BOB TEXTILE GUSAU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BOB TEXTILE GUSAU — quality fabrics, lace, Ankara, men's materials, shoes and fashion accessories.">
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#cfd4da;padding-top:68px}
+    .top-marquee{background:#111;position:fixed;top:0;width:100%;height:30px;display:flex;align-items:center;overflow:hidden;z-index:3000}
+    .logo{height:30px;margin:0;padding:0;object-fit:contain;background:#111;z-index:10}
+    .marquee-wrapper{position:absolute;width:100%;overflow:hidden;z-index:1}
+    .marquee-text{font-size:16px;font-weight:bold;white-space:nowrap;animation:move 12s linear infinite;color:white;margin-left:120px}
+    @keyframes move{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    .admin{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:5000;padding:5px;overflow-y:auto;flex-direction:column;align-items:center;box-sizing:border-box}
+    .admin h3{width:100%;max-width:320px;margin:6px 0 4px;font-size:16px}
+    .admin hr{width:100%;max-width:320px;margin:6px 0;border:0;border-top:1px solid #ddd}
+    .admin .form-group{width:100%;max-width:320px;margin:3px 0}
+    .admin label{display:block;width:100%;font-size:13px;font-weight:bold;color:#222;margin-bottom:2px}
+    .admin input,.admin select{width:100%;max-width:320px;padding:8px;font-size:13px;border:1px solid #ccc;border-radius:8px;margin:2px 0;box-sizing:border-box}
+    .admin .btn{width:100%;max-width:320px;padding:9px;margin:4px 0;font-size:13px;border:none;border-radius:8px;cursor:pointer;text-align:center}
+    .admin-icon{position:absolute;right:0;width:30px;height:30px;background:#222;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:10}
+    .category-bar{position:fixed;top:30px;width:100%;height:30px;display:flex;align-items:center;overflow-x:auto;z-index:2000;background:linear-gradient(90deg,#1877F2,#0d5bd7);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+    .category-btn{display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:white;padding:5px 10px;margin:3px 4px;border-radius:18px;white-space:nowrap;cursor:pointer;font-size:15px;font-weight:500;transition:.2s}
+    .category-btn.active{background:white;color:#1877F2}
+    .view{display:none;padding:0 10px 10px}
+    .active-view{display:block!important}
+    .card{background:white;border-radius:14px;padding:7px;margin-bottom:10px}
+    .img-wrap{position:relative;overflow:hidden;border-radius:12px}
+    .new-badge{position:absolute;top:8px;left:8px;background:#b00020;color:white;font-size:11px;padding:4px 6px;border-radius:5px;z-index:10}
+    .carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;width:100%;aspect-ratio:9/16;border-radius:12px;-webkit-overflow-scrolling:touch}
+    .carousel::-webkit-scrollbar,.testimonial-carousel::-webkit-scrollbar,div::-webkit-scrollbar{display:none}
+    .carousel video{flex:0 0 100%;width:100%;aspect-ratio:9/16;height:auto;object-fit:cover;scroll-snap-align:start;border-radius:12px;background:#000;display:block}
+    .video-container{position:relative;flex:0 0 100%;width:100%;aspect-ratio:9/16;height:auto;scroll-snap-align:start;border-radius:12px;overflow:hidden;background:#000}
+    .video-container video{width:100%;height:100%;object-fit:cover;display:block}
+    .video-sound-btn{position:absolute;left:12px;bottom:12px;width:38px;height:38px;border:none;border-radius:50%;background:rgba(0,0,0,.65);color:white;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:20;backdrop-filter:blur(4px)}
+    .video-sound-btn:active{transform:scale(.9)}
+    .carousel img{flex:0 0 100%;width:100%;aspect-ratio:9/16;height:auto;object-fit:cover;scroll-snap-align:start;border-radius:12px}
+    .social-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 10px;border-radius:18px;color:#fff;font-size:11px;font-weight:500;width:fit-content;max-width:120px;white-space:nowrap;flex-shrink:0}
+    .social-btn img{width:18px;height:18px;object-fit:contain}
+    .dots{text-align:center;margin-top:5px}
+    .dot{height:8px;width:8px;margin:0 3px;background:#bbb;border-radius:50%;display:inline-block}
+    .dot.active{background:#25D366}
+    .buy-btn{background:#25D366;color:white;border:none;width:100%;padding:9px;margin-top:6px;border-radius:10px;font-weight:bold;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
+    input,select{width:100%;max-width:320px;padding:10px;margin:5px 0;box-sizing:border-box}
+    .btn{width:100%;padding:10px;background:green;color:white;border:none;margin-top:5px;cursor:pointer}
+    .admin-item,.testimonial-item{display:flex;align-items:center;gap:10px;background:#f2f2f2;padding:8px;margin:5px 0;border-radius:6px}
+    .delete-btn{background:red;color:white;border:none;padding:6px;cursor:pointer}
+    .testimonial-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:12px}
+    .testimonial-carousel img{min-width:100%;height:380px;object-fit:contain;scroll-snap-align:center;background:white;border-radius:12px}
+    .testimonial-item img{width:40px;height:40px;object-fit:cover;border-radius:5px}
+    .fb{background:#1877F2}.wa{background:#25D366}
+    .carousel,.video-container{margin-top:0!important}
+    .muted-note{font-size:13px;color:#555}
+  </style>
+</head>
+<body>
+  <div class="top-marquee">
+    <img src="logo.png" class="logo" alt="Bob Textile Gusau logo">
+    <div class="marquee-wrapper"><div class="marquee-text">BOB TEXTILE GUSAU 🧵 • PREMIUM TEXTILE QUALITY • ELEGANT FABRICS • STYLE AND QUALITY YOU CAN TRUST •</div></div>
+    <div class="admin-icon" onclick="openAdmin()" aria-label="Open admin login" title="Admin login">🔒</div>
+  </div>
 
-/* MOVING TEXT */
-.marquee-wrapper{
-position:absolute;
-width:100%;
-overflow:hidden;
-z-index:1;
-}
+  <div class="category-bar" id="categoryBar"></div>
 
-.marquee-text{
-white-space:nowrap;
-animation:move 12s linear infinite;
-color:white;
-margin-left:120px;
-}
-n,.
-@keyframes move{
-0%{transform:translateX(100%);}
-100%{transform:translateX(-100%);}
-}
+  <div id="aboutView" class="view active-view">
+    <div class="card">
+      <h3 style="text-align:center">What Our Customers Say 💬</h3>
+      <div class="carousel testimonial-carousel" id="testimonialCarousel"></div>
+      <div class="dots" id="testimonialDots"></div>
+      <hr>
+      <h2 style="text-align:center">Welcome to BOB TEXTILE GUSAU 👋</h2>
+      <p style="text-align:center">Your destination for quality fabrics, beautiful lace, Ankara, men's materials, shoes and fashion accessories in Gusau, Zamfara State.</p>
+      <hr>
+      <h3>About Us</h3>
+      <p><strong>BOB TEXTILE GUSAU</strong> is a textile and fashion store created to help customers find quality fabrics and stylish materials for everyday wear, celebrations and special occasions. We aim to offer attractive choices, dependable service and a welcoming shopping experience.</p>
+      <p>Our product range can include lace fabrics, Ankara prints, senator materials, men's fabrics, women's fabrics, suit materials, clothing, shoes and fashion accessories. New products and categories can be added through the admin panel.</p>
+      <p>At <strong>BOB TEXTILE GUSAU</strong>, we value quality, style and customer satisfaction. Contact us to ask about fabric availability, product details, orders and delivery.</p>
+      <hr>
+      <h3>Our Location</h3>
+      <p><strong>📍 Gusau, Zamfara State, Nigeria</strong><br>Visit or contact us for store location details.</p>
+      <hr>
+      <h3>Contact & Business Info</h3>
+      <p>💬 WhatsApp orders and enquiries<br>🧵 Fabrics, lace, Ankara and men's materials<br>👞 Shoes and fashion accessories<br>🚚 Ask us about available delivery options</p>
+      <p class="muted-note">Update the business phone number, exact address, opening hours and social media links when they are confirmed.</p>
+      <hr>
+      <h3>Connect With Us</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-bottom:5px">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" style="text-decoration:none"><div class="social-btn fb"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="">Facebook</div></a>
+        <a href="#" onclick="contactWhatsApp();return false" style="text-decoration:none"><div class="social-btn wa"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="">WhatsApp</div></a>
+      </div>
+    </div>
+  </div>
 
-.admin{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:white;
-  z-index:5000;
-  padding:10px; /* reduced */
-  overflow:auto;
-  flex-direction:column;
-  align-items:center;
-} 
-    
-/* FIXED COLUMN WIDTH */
-.admin .form-group,
-.admin h3,
-.admin input,
-.admin select,
-.admin .btn{
-width:100%;
-max-width:320px;
-}
-
-.admin input,
-.admin select{
-width:100%;
-max-width:320px;
-padding:8px;
-font-size:14px;
-border-radius:8px;
-margin-bottom:8px;
-}
-
-.admin .btn{
-width:100%;
-max-width:320px;
-padding:8px;
-font-size:13px;
-border-radius:8px;
-margin:6px 0;
-text-align:center;
-}
-
-.admin label{
-display:block;
-text-align:left;
-font-size:13px;
-font-weight:bold;
-margin:10px 0 5px;
-width:100%;
-max-width:320px;
-}
-
-/* ADMIN ICON */
-.admin-icon{
-position:absolute;
-right:0;
-width:45px;
-height:45px;
-background:#222;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-cursor:pointer;
-z-index:10;
-}
-
-/* CATEGORY */
-.category-bar{
-  position:fixed;
-  top:45px;
-  width:100%;
-  height:45px;
-  display:flex;
-  align-items:center;
-  overflow-x:auto;
-  z-index:2000;
-
-  background: linear-gradient(90deg, #1877F2, #0d5bd7);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-    
-.category-btn{
-  color:white;
-  padding:6px 14px;
-  margin:5px;
-  border-radius:18px;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:500;
-  transition:0.2s;
-}
-
-.category-btn.active{
-  background:white;
-  color:#1877F2;
-}
-
-.view{display:none;padding:10px;}
-.active-view{display:block;}
-
-/* CARD */
-.card{
-background:white;
-border-radius:14px;
-padding:10px;
-margin-bottom:15px;
-}
-
-/* IMAGE */
-.img-wrap{
-position:relative;
-overflow:hidden;
-border-radius:12px;
-}
-
-/* NEW BADGE */
-.new-badge{
-position:absolute;
-top:8px;
-left:8px;
-background:red;
-color:white;
-font-size:11px;
-padding:4px 6px;
-border-radius:5px;
-z-index:10;
-}
-
-/* CAROUSEL */
-.carousel{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-
-  width:100%;
-  border-radius:12px;
-
-  -webkit-overflow-scrolling:touch;
-}
-
-.carousel::-webkit-scrollbar{
-  display:none;
-}
-
-.carousel img{
-  flex:0 0 100%;          /* VERY IMPORTANT */
-  width:100%;
-  height:380px;
-
-  object-fit:cover;
-  border-radius:12px;
-
-  scroll-snap-align:start; /* IMPORTANT */
-}
-
-.social-btn img{
-width:22px;
-height:22px;
-}
-.social-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-
-  padding:6px 10px;
-  border-radius:18px;
-
-  color:#fff;
-  font-size:11px;
-  font-weight:500;
-
-  width:fit-content;   /* key fix */
-  max-width:120px;     /* prevents stretching */
-  white-space:nowrap;
-
-  flex-shrink:0;
-}
-
-.social-btn img{
-width:18px;
-height:18px;
-object-fit:contain;
-}
-.carousel::-webkit-scrollbar{display:none;}
-
-/* DOTS */
-.dots{text-align:center;margin-top:5px;}
-.dot{
-height:8px;width:8px;
-margin:0 3px;
-background:#bbb;
-border-radius:50%;
-display:inline-block;
-}
-.dot.active { background:#25D366; }
-
-/* PRICE */
-.price{
-background:#111;
-color:white;
-text-align:center;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-}
-
-/* BUY BUTTON FIXED */
-.buy-btn{
-background:#25D366;
-color:white;
-border:none;
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:12px;
-font-weight:bold;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-cursor:pointer;
-}
-
-.buy-btn img{
-width:20px;
-height:20px;
-display:block;
-}
-
-
-input,select{
-width:100%;
-padding:10px;
-margin:5px 0;
-}
-
-.btn{
-width:100%;
-padding:10px;
-background:green;
-color:white;
-border:none;
-margin-top:5px;
-cursor:pointer;
-}
-
-.admin-item{
-display:flex;
-align-items:center;
-gap:10px;
-background:#f2f2f2;
-padding:8px;
-margin:5px 0;
-border-radius:6px;
-}
-
-.delete-btn{
-background:red;
-color:white;
-border:none;
-padding:6px;
-cursor:pointer;
-}
-
-.testimonial-carousel{
-display:flex;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-scroll-behavior:smooth;
-border-radius:12px;
-}
-
-.testimonial-carousel::-webkit-scrollbar{
-display:none;
-}
-
-.testimonial-carousel img{
-min-width:100%;
-height:380px;      /* same as product images */
-object-fit:contain;
-scroll-snap-align:center;
-background:white;
-border-radius:12px;
-}
-.testimonial-item{
-display:flex;
-align-items:center;
-gap:10px;
-background:#f2f2f2;
-padding:8px;
-margin:5px 0;
-border-radius:6px;
-}
-
-.testimonial-item img{
-width:40px;
-height:40px;
-object-fit:cover;
-border-radius:5px;
-}
-.fb{background:#1877F2;}
-.ig{background:#E1306C;}
-.tt{background:#000;}
-.wa{background:#25D366;}
-
-div::-webkit-scrollbar{
-display:none;
-}
-.admin .form-group{
-width:100%;
-max-width:300px;
-margin:10px auto;
-}
-
-.admin .form-group{
-  width:100%;
-  max-width:320px;
-  margin:8px 0;
-}
-
-.admin .form-group label{
-font-size:13px;
-font-weight:bold;
-margin-bottom:4px;
-color:#222;
-}
-
-.admin .form-group input,
-.admin .form-group select{
-width:100%;
-padding:8px;
-font-size:13px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-</style>      
-</head> 
-  <body> 
- 
-    
- <!-- HEADER -->  
- <div class="top-marquee">        
- <img src="loko.jpg" class="logo">   
- <div class="marquee-wrapper">   <div class="marquee-text">        
-      ✨ SWEN ONLINE SHOPPING ✨ Premium Online Store ✨ Quality Fabrics ✨        
-    </div>        
-  </div>    <div class="admin-icon" onclick="openAdmin()">🔒</div>        
-</div>    
-
- <!-- CATEGORY -->   
-    <div class="category-bar" id="categoryBar"></div>     
-    <!-- VIEWS -->   
-    <div id="aboutView" class="view active-view">        
-  <div class="card">   
-   
- <!-- TESTIMONIAL -->   
- <h3 style="text-align:center;">What Our Customers Say 💬</h3>        
-<div class="carousel testimonial-carousel" id="testimonialCarousel"></div>      
-<div class="dots" id="testimonialDots"></div>      
-<hr> 
-    
- <!-- WELCOME -->   
- <h2 style="text-align:center;">Welcome to Swen Online Shopping 👋</h2>        
-<p style="text-align:center;">        
-  Your trusted destination for premium fabrics, modern fashion styles, and quality textile products across Nigeria.        
-</p>      <hr>     
- 
-  <!-- ABOUT -->    
-    <h3>About Us</h3>        
-<p>        
-  SWEN ONLINE SHOPPING is a professional textile brand specializing in high-quality fabrics,        
-  traditional attire, and modern fashion designs. We are committed to delivering        
-  durable, stylish, and affordable materials to our customers.        
-  <br><br>        
-  We serve individuals, tailors, and fashion designers with premium materials        
-  that stand out in quality and style.        
-</p>      <hr>      <!-- LOCATIONS -->      <h3>Our Locations</h3>      <p><strong>📍 Kano</strong><br>        
-  • Shop No. 12, Gidan Zeeta, IBB Way, Kantin Kwari Market, Kano<br>        
-  • Muwaffaq House, Isyaka Rabiu Road, Kano        
-</p>      <p><strong>📍 Zamfara (Gusau)</strong><br>        
-  • No. 02 DINAWA Plaza, BYE PASS ROAD, Gusau<br>        
-  • T/Wada, Opp. Gamzaki Road, Gusau<br>        
-  • Shop No. 8B, Magizawa Plaza, Gusau        
-</p>     <hr>    
-
-    
-    
-<!-- CONTACT -->   
-<h3>Contact & Business Info</h3>        
-<p>        
-  📞 08133839892<br>        
-  🕒 Monday – Saturday (9:00AM – 6:00PM)<br>        
-  🚚 Nationwide delivery available<br>        
-  💬 Fast WhatsApp support        
-</p>      <hr> 
-
-
-    
- <!-- SOCIAL -->  
- <h3>Connect With Us</h3>
-  <div style="
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  padding-bottom:5px;
-">   
-    
-    <a href="https://www.facebook.com/share/17RD54HCzq/" target="_blank" style="text-decoration:none;">        
-    <div class="social-btn fb">        
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">        
-      Facebook        
-    </div>        
-  </a>        <a href="https://www.instagram.com/bo/" target="_blank" style="text-decoration:none;">        
-    <div class="social-btn ig">        
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">        
-      Instagram        
-    </div>        
-  </a>        <a href="https://www.tiktok.com/@dabo_market" target="_blank" style="text-decoration:none;">        
-    <div class="social-btn tt">        
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">        
-      TikTok        
-    </div>        
-  </a>        <a href="https://wa.me/2348133839892" target="_blank" style="text-decoration:none;">        
-    <div class="social-btn wa">        
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">        
-      WhatsApp        
-    </div>        
-  </a>      </div>      </div>        
-</div>  <div id="shaddaView" class="view"></div>        
-<div id="shoesView" class="view"></div>        
-<div id="abayasView" class="view"></div>        
-<div id="yardView" class="view"></div>      
-<div id="bagsView" class="view"></div>      
-<div id="capsView" class="view"></div>        
-<div id="vailView" class="view"></div>       
-  <!-- ADMIN -->    
-  <div class="admin" id="adminPanel">     
-    <h3>Admin Panel</h3>     
-    <div class="form-group">  
-  <label>Product Name</label>  
-  <input id="aName" placeholder="Enter product name">  
-</div>  <div class="form-group">  
-  <label>Price</label>  
-  <input id="aPrice" placeholder="Enter price">  
-</div>  <div class="form-group">  
-  <label>Category</label>  
-  <select id="aCategory"></select>  
-</div>  <button class="btn" onclick="uploadImage()">📷 Upload Images</button>
-<button class="btn" onclick="addProduct()">Save Product</button>
-
-  <hr>     
-    <h3>Delete Category</h3>  <div class="form-group">  
-  <label>Select Category</label>  
-  <select id="catDelete"></select>  
-</div>  <button class="btn" onclick="deleteCategory()">Delete Category</button>
-<hr>
-<h3>Delete Product</h3>
-<select id="delCat" onchange="loadDelete()"></select>
-
-  <div id="delList"></div>        <hr>      <h3>Testimonials</h3>        
-  <button class="btn" onclick="uploadTestimonials()">Upload Testimonials</button>        <hr>      <h3>Manage Testimonials</h3>      
-  <div id="testimonialList"></div>      <hr>      <h3>Add Category</h3>      
-  <input id="newCat" placeholder="New category name">      
-  <button class="btn" onclick="addCategory()">Add Category</button>      <hr>    <button class="btn" onclick="closeAdmin()" style="background:red;">Close</button>  </div>     
-
-
+  <div class="admin" id="adminPanel">
+    <h3>BOB TEXTILE GUSAU — Admin Panel</h3>
+    <p class="muted-note">Add fabrics, shoes and accessories to your store.</p>
+    <div class="form-group"><label for="aName">Product Name</label><input id="aName" placeholder="e.g. Premium Lace Fabric"></div>
+    <div class="form-group"><label for="aCategory">Category</label><select id="aCategory"></select></div>
+    <button class="btn" onclick="uploadMedia()">📷🎥 Upload Images / Videos</button>
+    <p id="uploadStatus" class="muted-note">No media selected yet.</p>
+    <button class="btn" onclick="addProduct()">Save Product</button>
+    <hr>
+    <h3>Delete Category</h3>
+    <div class="form-group"><label for="catDelete">Select Category</label><select id="catDelete"></select></div>
+    <button class="btn" onclick="deleteCategory()">Delete Category</button>
+    <hr>
+    <h3>Delete Product</h3>
+    <select id="delCat" onchange="loadDelete()" aria-label="Select product category"></select>
+    <div id="delList"></div>
+    <hr>
+    <h3>Testimonials</h3>
+    <button class="btn" onclick="uploadTestimonials()">Upload Testimonials</button>
+    <hr>
+    <h3>Manage Testimonials</h3>
+    <div id="testimonialList"></div>
+    <hr>
+    <h3>Add Category</h3>
+    <input id="newCat" placeholder="e.g. Ankara Fabrics">
+    <button class="btn" onclick="addCategory()">Add Category</button>
+    <hr>
+    <button class="btn" onclick="logoutAdmin()" style="background:red">Logout</button>
+  </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// YOUR FIREBASE CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyA6ZaMnWKJEvSUlJgh31tU6rj8CvuietuM",
   authDomain: "bob-26647.firebaseapp.com",
@@ -543,674 +139,541 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// MAKE GLOBAL
+const auth = getAuth(app);
 window.db = db;
+window.auth = auth;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+window.signOut = signOut;
 window.fb = { collection, addDoc, getDocs, deleteDoc, doc };
+window.firebaseReady = true;
+window.dispatchEvent(new Event("firebase-ready"));
 </script>
 
+<script>
+"use strict";
 
-    
-    
- <script>   
-// Done
+/* BOB TEXTILE GUSAU — single, consolidated application script */
 let categories = [];
 let products = [];
 let uploadedImages = [];
+let uploadedVideos = [];
+let testimonials = [];
+let tIndex = 0;
+let tAuto = null;
+let adminPanel, delCat, delList, aName, aCategory, aboutView;
 
-let adminPanel, delCat, delList, aName, aPrice, aCategory, aboutView;
+const WHATSAPP_NUMBER = ""; // Add the store's WhatsApp number in international format, digits only, e.g. 2348012345678.
+const DEFAULT_CATEGORIES = [
+  "fabrics", "lace fabrics", "ankara fabrics", "senator materials",
+  "mens fabrics", "womens fabrics", "shoes", "fashion accessories"
+];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", initApp);
+
+async function initApp() {
   adminPanel = document.getElementById("adminPanel");
   delCat = document.getElementById("delCat");
   delList = document.getElementById("delList");
   aName = document.getElementById("aName");
-  aPrice = document.getElementById("aPrice");
   aCategory = document.getElementById("aCategory");
   aboutView = document.getElementById("aboutView");
 
-  loadCategoriesFromFirebase();
-  loadProductsFromFirebase();
-  loadTestimonialsFromFirebase();
-});
-
-   
-/* add category */
-  // Done 
-async function addCategory(){
-  let newCat = document.getElementById("newCat").value.trim().toLowerCase();
-
-  if(!newCat) return;
-
-  await fb.addDoc(fb.collection(db, "categories"), {
-    name: newCat
-  });
-
-  document.getElementById("newCat").value = "";
-
-  loadCategoriesFromFirebase();
+  try {
+    await waitForFirebase();
+    await loadCategoriesFromFirebase();
+    await loadProductsFromFirebase();
+    await loadTestimonialsFromFirebase();
+    loadCategories();
+    restoreActiveView();
+    console.log("BOB TEXTILE GUSAU loaded successfully.");
+  } catch (error) {
+    console.error("Firebase startup error:", error);
+    showFirebaseError(error);
+  }
 }
 
-   
-// LOAD CATEGORIES 
-   // Dome
-async function loadCategoriesFromFirebase(){
-  categories = [];
-
-  const snap = await fb.getDocs(fb.collection(db, "categories"));
-
-  snap.forEach(docItem=>{
-    categories.push({
-      id: docItem.id,
-      name: docItem.data().name
-    });
+function waitForFirebase(timeout = 10000) {
+  if (window.firebaseReady && window.db && window.fb) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("Firebase did not initialize within 10 seconds.")), timeout);
+    window.addEventListener("firebase-ready", () => { clearTimeout(timer); resolve(); }, { once: true });
   });
+}
 
-  // convert to simple array for your system
-  categories = categories.map(c => c.name);
+function showFirebaseError(error) {
+  const bar = document.getElementById("categoryBar");
+  if (bar) {
+    bar.innerHTML = `<div class="category-btn active" onclick="location.reload()">HOME</div><div style="color:white;font-size:11px;padding:6px 8px;white-space:nowrap">Firebase connection error — check setup and refresh</div>`;
+  }
+  console.error("Firebase error:", error?.code || "unknown", error?.message || error);
+}
 
+function getDataValue(data, keys) {
+  for (const key of keys) {
+    const value = data?.[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  return null;
+}
+
+function normalizeArray(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (typeof value === "string" && value.trim()) return value.split(",").map(v => v.trim()).filter(Boolean);
+  return [];
+}
+
+function normalizeProduct(docItem) {
+  const data = docItem.data() || {};
+  let images = normalizeArray(getDataValue(data, ["images","imageUrls","imageURLs","imageUrl","image","photo","photos"]));
+  let videos = normalizeArray(getDataValue(data, ["videos","videoUrls","videoURLs","videoUrl","video"]));
+  const media = normalizeArray(data.media);
+  images = images.map(v => typeof v === "object" ? (v.secure_url || v.url || v.src || "") : v).filter(Boolean);
+  videos = videos.map(v => typeof v === "object" ? (v.secure_url || v.url || v.src || "") : v).filter(Boolean);
+  if (!images.length && !videos.length && media.length) {
+    for (const item of media) {
+      const url = typeof item === "object" ? (item.secure_url || item.url || item.src) : item;
+      const type = typeof item === "object" ? (item.resource_type || item.type || "") : "";
+      if (!url) continue;
+      if (type === "video" || /\.(mp4|mov|webm)(\?|$)/i.test(url)) videos.push(url);
+      else images.push(url);
+    }
+  }
+  return {
+    id: docItem.id, ...data,
+    name: String(getDataValue(data, ["name","productName","title"]) || "Textile Product"),
+    category: String(getDataValue(data, ["category","cat","categoryName"]) || "").trim().toLowerCase(),
+    images, videos,
+    date: Number(getDataValue(data, ["date","createdAt","timestamp"]) || 0)
+  };
+}
+
+async function loadCategoriesFromFirebase() {
+  const snap = await fb.getDocs(fb.collection(db, "categories"));
+  categories = [];
+  snap.forEach(item => {
+    const raw = getDataValue(item.data() || {}, ["name","category","title"]);
+    if (raw) {
+      const name = String(raw).trim().toLowerCase();
+      if (name && name !== "workshop" && !categories.includes(name)) categories.push(name);
+    }
+  });
+  /* Seed textile categories only when the new project's category collection is empty. */
+  if (!categories.length) {
+    for (const name of DEFAULT_CATEGORIES) {
+      await fb.addDoc(fb.collection(db, "categories"), { name, createdAt: Date.now() });
+    }
+    categories = [...DEFAULT_CATEGORIES];
+  }
+  categories = [...new Set(categories)].sort((a,b) => a.localeCompare(b));
   loadCategories();
   fillCats();
 }
 
- //Done  
-function fillCats(){
-
-let html = categories
-.map(c => `<option value="${c}">${c.toUpperCase()}</option>`)
-.join("");
-
-delCat.innerHTML = html;
-
-document.getElementById("catDelete").innerHTML = html;
-
-// ADD THIS
-aCategory.innerHTML = html;
-
+function loadCategories() {
+  const bar = document.getElementById("categoryBar");
+  if (!bar) return;
+  bar.innerHTML = "";
+  const entries = [{ label: "HOME", value: "about" }, ...categories.map(name => ({ label: name.toUpperCase(), value: name }))];
+  entries.forEach((entry, index) => {
+    const button = document.createElement("div");
+    button.className = "category-btn";
+    button.textContent = entry.label;
+    button.dataset.category = entry.value;
+    button.addEventListener("click", () => showView(entry.value, button));
+    bar.appendChild(button);
+  });
+  const saved = localStorage.getItem("bobTextileActiveView") || "about";
+  const active = [...bar.querySelectorAll(".category-btn")].find(b => b.dataset.category === saved);
+  (active || bar.querySelector(".category-btn"))?.classList.add("active");
 }
-   
-// Done   
-async function deleteCategory(){
-  let cat = document.getElementById("catDelete").value;
 
-  const snap = await fb.getDocs(fb.collection(db, "categories"));
-
-  snap.forEach(async (d)=>{
-    if(d.data().name === cat){
-      await fb.deleteDoc(fb.doc(db, "categories", d.id));
+function fillCats() {
+  const all = [...new Set(categories)];
+  const html = all.map(c => `<option value="${escapeAttr(c)}">${escapeHtml(c.toUpperCase())}</option>`).join("");
+  ["delCat","catDelete","aCategory"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const previous = el.value;
+      el.innerHTML = html;
+      if (all.includes(previous)) el.value = previous;
     }
   });
-
-  loadCategoriesFromFirebase();
 }
-   
-/* VIEW */
-//Done
-document.querySelectorAll(".view")?.forEach(v=>{
-  v.classList.remove("active-view");
-});
 
- // DONE
-function showView(type, el){
+async function addCategory() {
+  const input = document.getElementById("newCat");
+  const newCat = input.value.trim().toLowerCase();
+  if (!newCat) return alert("Please enter a category name.");
+  if (categories.includes(newCat)) return alert("This category already exists.");
+  try {
+    await fb.addDoc(fb.collection(db, "categories"), { name: newCat, createdAt: Date.now() });
+    input.value = "";
+    await loadCategoriesFromFirebase();
+    alert("Category added successfully ✅");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to add category ❌\n" + (error.code || error.message || ""));
+  }
+}
 
-  document.querySelectorAll(".category-btn").forEach(b=>{
-    b.classList.remove("active");
-  });
+async function deleteCategory() {
+  const cat = document.getElementById("catDelete")?.value;
+  if (!cat) return;
+  if (!confirm(`Delete the "${cat}" category? Products in Firestore will not be deleted.`)) return;
+  try {
+    const snap = await fb.getDocs(fb.collection(db, "categories"));
+    for (const item of snap.docs) {
+      const raw = getDataValue(item.data() || {}, ["name","category","title"]);
+      if (String(raw || "").trim().toLowerCase() === cat) await fb.deleteDoc(fb.doc(db, "categories", item.id));
+    }
+    categories = categories.filter(c => c !== cat);
+    loadCategories();
+    fillCats();
+    alert("Category deleted successfully. Products were kept.");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete category ❌\n" + (error.code || error.message || ""));
+  }
+}
 
-  if(el) el.classList.add("active");
+function safeType(type) {
+  return String(type || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
 
-  localStorage.setItem("activeView", type);
-
-  document.querySelectorAll(".view").forEach(v=>{
-    v.classList.remove("active-view");
-  });
-
-  if(type === "about"){
-    aboutView.classList.add("active-view");
+function showView(type, el) {
+  document.querySelectorAll(".category-btn").forEach(b => b.classList.toggle("active", b === el || (!el && b.dataset.category === type)));
+  localStorage.setItem("bobTextileActiveView", type);
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active-view"));
+  if (type === "about") {
+    aboutView?.classList.add("active-view");
     return;
   }
 
-  let view = document.getElementById(type + "View");
-
-  if(!view){
+  const safe = safeType(type);
+  let view = document.getElementById(safe + "View");
+  if (!view) {
     view = document.createElement("div");
-    view.id = type + "View";
+    view.id = safe + "View";
     view.className = "view";
     document.body.appendChild(view);
   }
 
-  let list = products.filter(p => p.category === type);
-
-  let html = "";
-
-  list.forEach((p,i)=>{
-
-let diff = Date.now() - p.date;
-
-let timeText = "";
-
-let mins = Math.floor(diff / 60000);
-let hours = Math.floor(diff / 3600000);
-let days = Math.floor(diff / 86400000);
-
-if(mins < 60){
-  timeText = mins + " min ago";
-}
-else if(hours < 24){
-  timeText = hours + " hr ago";
-}
-else{
-  timeText = days + " day ago";
-}
-
-let images = (p.images || []).map(img => `<img src="${img}">`).join("");
-
-html += `
-      <div class="card">
-        <div class="img-wrap">
-
-  <div class="new-badge">${timeText}</div>
-
-  <div class="carousel car${type}${i}">
-    ${images}
-  </div>
-
-</div>
-
-        <div class="dots dots${type}${i}"></div>
-
-        <div class="price">₦ ${p.price}</div>
-
-        <button class="buy-btn" onclick="buyNow(${i},'${type}')">
-          BUY NOW
-        </button>
-      </div>
-    `;
-  });
-
-  view.innerHTML = html;
+  const list = products.filter(p => String(p.category || "").trim().toLowerCase() === String(type).trim().toLowerCase());
+  view.innerHTML = list.length ? list.map((p, i) => {
+    const media = buildMedia(p);
+    const carouselId = `car-${safe}-${i}`;
+    const dotsId = `dots-${safe}-${i}`;
+    return `<div class="card"><div class="img-wrap">${isNewProduct(p) ? '<div class="new-badge">NEW</div>' : ''}<div class="carousel" id="${carouselId}">${media}</div></div><div class="dots" id="${dotsId}"></div><button class="buy-btn" onclick="buyNow(${i}, '${escapeAttr(type)}')">ENQUIRE / BUY NOW</button></div>`;
+  }).join("") : `<div class="card"><h3 style="text-align:center">${escapeHtml(type.toUpperCase())}</h3><p style="text-align:center">No products uploaded yet. Please check back soon.</p></div>`;
   view.classList.add("active-view");
-
-  list.forEach((p,i)=>setupCarousel(type,i));
-}
-// DONE
-/* BUY NOW */
-function buyNow(i, type){
-  // get product safely
-  const list = products.filter(p => p.category === type);
-  const p = list[i];
-  if (!p) return;
-
-  // get carousel (may not exist)
-  const car = document.querySelector(".car" + type + i);
-
-  // safe index calculation
-  let index = 0;
-  if (car && car.clientWidth > 0) {
-    index = Math.round(car.scrollLeft / car.clientWidth);
-  }
-
-  // safe image selection
-  const images = Array.isArray(p.images) ? p.images : [];
-  const img = images[index] || images[0] || "No image";
-
-  // build message
-  const msg = `Hello 👋,
-
-I want to order this Product:
-
-🧵 Category: ${type.toUpperCase()}
-🛍️ Product: ${p.name || "N/A"}
-💰 Price: ₦${p.price || "N/A"}
-
-🖼️ Selected Image:
-${img}
-
-Is this available? I want to buy.`;
-
-  // open WhatsApp
-  window.open(
-    "https://wa.me/2349114738932?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
-}
-   
-// DONE
-/* CAROUSEL */
-function setupCarousel(type,i){
-let c = document.querySelector(".car"+type+i);
-let box = document.querySelector(".dots"+type+i);
-
-if(!c || !box) return; // ✅ prevent crash
-
-let imgs = c.querySelectorAll("img");
-box.innerHTML = "";
-
-// create dots
-imgs.forEach((_,x)=>{
-  let d = document.createElement("span");
-  d.className = "dot";
-  if(x===0) d.classList.add("active");
-  box.appendChild(d);
-});
-
-let dots = box.querySelectorAll(".dot");
-
-// ✅ prevent multiple listeners
-c.onscroll = () => {
-  if(c.clientWidth === 0) return;
-
-  let index = Math.round(c.scrollLeft / c.clientWidth);
-
-  dots.forEach(d=>d.classList.remove("active"));
-  if(dots[index]) dots[index].classList.add("active");
-};
+  list.forEach((p, i) => {
+    setupCarousel(type, i);
+    setupVideoAutoplay(document.getElementById(`car-${safe}-${i}`));
+  });
 }
 
-// DONE
-/* ADMIN */
-function openAdmin(){
+function isNewProduct(p) {
+  const date = Number(p.date || 0);
+  return date > 0 && Date.now() - date < 86400000;
+}
 
-  const pass = prompt("Enter admin password:");
+function buildMedia(p) {
+  let html = "";
+  (p.images || []).forEach(url => {
+    html += `<img src="${escapeAttr(url)}" loading="lazy" alt="${escapeAttr(p.name)}" onerror="this.style.display='none'">`;
+  });
+  (p.videos || []).forEach(url => {
+    html += `<div class="video-container"><video src="${escapeAttr(url)}" muted playsinline loop preload="metadata"></video><button class="video-sound-btn" onclick="toggleVideoSound(this)" aria-label="Toggle video sound">🔇</button></div>`;
+  });
+  return html || `<div style="width:100%;aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;background:#111;color:white;border-radius:12px">No media available</div>`;
+}
 
-  if(!pass) return;
+function setupCarousel(type, i) {
+  const safe = safeType(type);
+  const carousel = document.getElementById(`car-${safe}-${i}`);
+  const box = document.getElementById(`dots-${safe}-${i}`);
+  if (!carousel || !box) return;
+  const media = carousel.querySelectorAll("img, .video-container");
+  box.innerHTML = "";
+  media.forEach((_, index) => {
+    const dot = document.createElement("span");
+    dot.className = "dot" + (index === 0 ? " active" : "");
+    box.appendChild(dot);
+  });
+  const dots = box.querySelectorAll(".dot");
+  carousel.onscroll = () => {
+    if (!carousel.clientWidth) return;
+    const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[index]?.classList.add("active");
+  };
+}
 
-  if(pass === "1234"){   // you can replace later with Firebase auth
-    
-    if(adminPanel) adminPanel.style.display = "flex";
+function setupVideoAutoplay(carousel) {
+  if (!carousel || !("IntersectionObserver" in window)) return;
+  const videos = carousel.querySelectorAll("video");
+  videos.forEach(video => {
+    video.muted = true;
+    video.playsInline = true;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          document.querySelectorAll(".carousel video").forEach(other => {
+            if (other !== video) { other.pause(); other.currentTime = 0; }
+          });
+          video.play().catch(() => {});
+        } else video.pause();
+      });
+    }, { threshold: [0, 0.6, 1] });
+    observer.observe(video);
+  });
+}
 
-    if(typeof fillCats === "function") fillCats();
-    if(typeof loadTestimonialAdmin === "function") loadTestimonialAdmin();
-
+function toggleVideoSound(button) {
+  const video = button?.closest(".video-container")?.querySelector("video");
+  if (!video) return;
+  if (video.muted) {
+    document.querySelectorAll(".carousel video").forEach(other => { other.muted = other !== video; });
+    document.querySelectorAll(".video-sound-btn").forEach(otherButton => { otherButton.textContent = otherButton === button ? "🔊" : "🔇"; });
+    video.muted = false;
+    video.volume = 1;
+    video.play().catch(() => {});
   } else {
-    alert("Wrong password");
+    video.muted = true;
+    button.textContent = "🔇";
   }
 }
- 
 
-// Done   
-/* UPLOAD */
-function uploadImage(){
-  if (typeof cloudinary === "undefined") {
-    alert("Upload tool not loaded. Refresh page.");
+function buyNow(i, type) {
+  const list = products.filter(p => String(p.category || "").toLowerCase() === String(type || "").toLowerCase());
+  const product = list[i];
+  if (!product) return;
+  const safe = safeType(type);
+  const carousel = document.getElementById(`car-${safe}-${i}`);
+  const index = carousel?.clientWidth ? Math.round(carousel.scrollLeft / carousel.clientWidth) : 0;
+  const mediaList = [...(product.images || []), ...(product.videos || [])];
+  const selectedMedia = mediaList[index] || mediaList[0] || "No media attached";
+  const message = `Hello, BOB TEXTILE GUSAU. I am interested in this item:\n\nProduct: ${product.name || "N/A"}\nCategory: ${String(type).toUpperCase()}\nProduct media: ${selectedMedia}\n\nPlease confirm availability and price.`;
+  if (!WHATSAPP_NUMBER) {
+    alert("Please set the store WhatsApp number in the WHATSAPP_NUMBER setting in index.html before enabling orders.");
     return;
   }
+  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message), "_blank", "noopener");
+}
 
-  // ✅ clear previous images (optional but recommended)
+async function openAdmin() {
+  const email = prompt("Enter Bob Textile Gusau admin email");
+  if (!email) return;
+  const password = prompt("Enter admin password");
+  if (!password) return;
+  try {
+    await waitForFirebase();
+    await window.signInWithEmailAndPassword(window.auth, email, password);
+    adminPanel.style.display = "flex";
+    fillCats();
+    loadDelete();
+    loadTestimonialAdmin();
+    alert("Admin login successful ✅");
+  } catch (error) {
+    console.error(error);
+    alert("Admin login failed ❌\n" + (error.code || error.message || "Check Firebase Authentication setup."));
+  }
+}
+
+async function logoutAdmin() {
+  try { await window.signOut(window.auth); } catch (error) { console.error(error); }
+  adminPanel.style.display = "none";
+  alert("Logged out.");
+}
+
+function uploadMedia() {
+  if (typeof cloudinary === "undefined") return alert("Upload tool not loaded. Refresh the page.");
   uploadedImages = [];
-
-  alert("Opening upload...");
-
+  uploadedVideos = [];
+  const status = document.getElementById("uploadStatus");
+  if (status) status.textContent = "Choose one or more textile product images/videos.";
   cloudinary.openUploadWidget({
     cloudName: "db92r6j9z",
     uploadPreset: "ummuhalti",
     sources: ["local", "camera"],
-    multiple: true
+    multiple: true,
+    resourceType: "auto",
+    clientAllowedFormats: ["jpg","jpeg","png","webp","mp4","mov","webm"]
   }, (error, result) => {
-
-    if (error) {
-      console.log("Upload error:", error);
-      alert("Upload failed");
-      return;
+    if (error) { console.error(error); alert("Upload failed ❌"); return; }
+    if (result?.event === "success") {
+      const url = result.info?.secure_url;
+      if (!url) return;
+      if (result.info.resource_type === "video") uploadedVideos.push(url);
+      else uploadedImages.push(url);
+      if (status) status.textContent = `Selected ${uploadedImages.length} image(s) and ${uploadedVideos.length} video(s).`;
     }
-
-    if (result && result.event === "success") {
-      uploadedImages.push(result.info.secure_url);
-      console.log("Uploaded:", result.info.secure_url);
-    }
-
-    // ✅ show ONE message when upload closes
-    if (result && result.event === "close") {
-      if(uploadedImages.length > 0){
-        alert(uploadedImages.length + " image(s) uploaded successfully!");
-      }
-    }
-
-  });
-}
-   
-/* SAVE */
-// DONE
-   
-function loadCategories(){
-
-  let bar = document.getElementById("categoryBar");
-
-  if(!bar) return;
-
-  // ABOUT BUTTON FIRST
-  let html = `
-    <div class="category-btn active"
-         onclick="showView('about', this)">
-      HOME
-    </div>
-  `;
-
-  // PRODUCT CATEGORIES
-  categories.forEach(c => {
-    html += `
-      <div class="category-btn"
-           onclick="showView('${c}', this)">
-        ${c.toUpperCase()}
-      </div>
-    `;
-  });
-
-  bar.innerHTML = html;
-}
-
-   
-// DONE   
-/* DELETE */
-function loadDelete(){
-let cat = delCat.value;
-let html = "";
-
-// filter first
-let filtered = products.filter(p => p.category === cat);
-
-filtered.forEach((p,i)=>{
-
-let img = (p.images && p.images.length > 0) ? p.images[0] : "";
-
-html += `
-<div class="admin-item">
-  <img src="${img}" width="40">
-  <div style="flex:1">${p.name || "No name"}</div>
-  <button class="delete-btn" onclick="delProduct(${i})">Delete</button>
-</div>`;
-});
-
-if(delList) delList.innerHTML = html;
-}
-
-// DONE
-async function delProduct(i){
-  let cat = delCat.value;
-
-  let filtered = products.filter(p => p.category === cat);
-  let productToDelete = filtered[i];
-
-  await fb.deleteDoc(fb.doc(db, "products", productToDelete.id));
-
-  loadProductsFromFirebase();
-}
-
-
-// DONE  
-async function deleteTestimonial(i){
-  let item = testimonials[i];
-
-  const snap = await fb.getDocs(fb.collection(db, "testimonials"));
-
-  snap.forEach(async (d)=>{
-    if(d.data().url === item){
-      await fb.deleteDoc(fb.doc(db, "testimonials", d.id));
+    if (result?.event === "close") {
+      const total = uploadedImages.length + uploadedVideos.length;
+      if (status) status.textContent = total ? `${uploadedImages.length} image(s), ${uploadedVideos.length} video(s) ready to save.` : "No media selected yet.";
+      if (total) alert(`${total} media file(s) uploaded successfully. Now select Save Product.`);
     }
   });
-
-  loadTestimonialsFromFirebase();
-  loadTestimonialAdmin();
 }
 
- // DONE  
-function del(i){
-let cat = delCat.value;
-
-let filtered = products.filter(p => p.category === cat);
-let productToDelete = filtered[i];
-
-if(!productToDelete) return; // ✅ safety
-
-products = products.filter(p => p !== productToDelete);
-
-localStorage.setItem("products", JSON.stringify(products));
-
-loadDelete();
-}  
-
-let testimonials = [];
-let tIndex = 0;
-let tAuto = null;
-
-// DONE   
-/* LOAD */
-async function loadTestimonialsFromFirebase(){
-  testimonials = [];
-
-  const snap = await fb.getDocs(fb.collection(db, "testimonials"));
-
-  snap.forEach(docItem=>{
-    testimonials.push({
-      id: docItem.id,
-      url: docItem.data().url
+async function addProduct() {
+  const name = aName.value.trim();
+  const category = aCategory.value.trim().toLowerCase();
+  if (!name) return alert("Please enter a product name.");
+  if (!category) return alert("Please select a category.");
+  if (!uploadedImages.length && !uploadedVideos.length) return alert("Upload at least one image or video first.");
+  try {
+    await fb.addDoc(fb.collection(db, "products"), {
+      name, category, images: [...uploadedImages], videos: [...uploadedVideos],
+      mediaType: "mixed", date: Date.now()
     });
+    uploadedImages = [];
+    uploadedVideos = [];
+    aName.value = "";
+    document.getElementById("uploadStatus").textContent = "No media selected yet.";
+    alert("Product saved successfully ✅");
+    await loadProductsFromFirebase();
+  } catch (error) {
+    console.error(error);
+    alert("Failed to save product ❌\n" + (error.code || error.message || ""));
+  }
+}
+
+async function loadProductsFromFirebase() {
+  const snap = await fb.getDocs(fb.collection(db, "products"));
+  products = snap.docs.map(normalizeProduct).sort((a,b) => Number(b.date || 0) - Number(a.date || 0));
+  loadDelete();
+  const saved = localStorage.getItem("bobTextileActiveView") || "about";
+  if (saved !== "about") showView(saved, null);
+}
+
+function loadDelete() {
+  if (!delCat || !delList) return;
+  fillCats();
+  const category = delCat.value;
+  const filtered = products.filter(p => String(p.category || "").toLowerCase() === String(category || "").toLowerCase());
+  delList.innerHTML = filtered.map((product, i) => {
+    const image = product.images?.[0];
+    return `<div class="admin-item">${image ? `<img src="${escapeAttr(image)}" width="40" height="40" style="object-fit:cover;border-radius:5px" alt="">` : `<span style="width:40px;height:40px;background:#111;color:white;display:flex;align-items:center;justify-content:center;border-radius:5px">🎥</span>`}<div style="flex:1">${escapeHtml(product.name || "Unnamed item")}</div><button class="delete-btn" onclick="delProduct(${i})">Delete</button></div>`;
+  }).join("");
+}
+
+async function delProduct(i) {
+  const category = delCat.value;
+  const filtered = products.filter(p => String(p.category || "").toLowerCase() === String(category || "").toLowerCase());
+  const product = filtered[i];
+  if (!product || !confirm(`Delete "${product.name}"?`)) return;
+  try {
+    await fb.deleteDoc(fb.doc(db, "products", product.id));
+    await loadProductsFromFirebase();
+    loadDelete();
+  } catch (error) {
+    console.error(error);
+    alert("Could not delete product ❌\n" + (error.code || error.message || ""));
+  }
+}
+
+async function loadTestimonialsFromFirebase() {
+  const snap = await fb.getDocs(fb.collection(db, "testimonials"));
+  testimonials = [];
+  snap.forEach(item => {
+    const data = item.data() || {};
+    const url = getDataValue(data, ["url","imageUrl","image"]);
+    if (url) testimonials.push({ id: item.id, url: String(url) });
   });
-
-  // convert to simple array
-  testimonials = testimonials.map(t => t.url);
-
   loadTestimonials();
 }
 
-function loadTestimonials(){
-
-  let box = document.getElementById("testimonialCarousel");
-  let dots = document.getElementById("testimonialDots");
-
-  if(!box || !dots) return;
-
-  // CREATE IMAGES
-  box.innerHTML = testimonials.map(img => `
-    <img src="${img}">
-  `).join("");
-
-  // CREATE DOTS
-  dots.innerHTML = testimonials.map((_,i)=>`
-    <span class="dot ${i===0 ? 'active' : ''}"
-          onclick="scrollTestimonial(${i})">
-    </span>
-  `).join("");
-
-  // RESET INDEX
+function loadTestimonials() {
+  const box = document.getElementById("testimonialCarousel");
+  const dots = document.getElementById("testimonialDots");
+  if (!box || !dots) return;
+  box.innerHTML = testimonials.map(item => `<img src="${escapeAttr(item.url)}" alt="Bob Textile Gusau customer testimonial" loading="lazy">`).join("");
+  dots.innerHTML = testimonials.map((_, i) => `<span class="dot ${i === 0 ? "active" : ""}" onclick="scrollTestimonial(${i})"></span>`).join("");
   tIndex = 0;
-
-  // START AUTO SLIDE
   startAuto();
-}
-
-/* SCROLL */
-// DONE
-function scrollTestimonial(i) {
-const box = document.getElementById("testimonialCarousel");
-const dots = document.querySelectorAll("#testimonialDots .dot");
-
-if(!box) return; // ✅ safety
-
-// clamp index within range
-if(i < 0) i = 0;
-if(i >= dots.length) i = dots.length - 1;
-
-// prevent divide/scroll issues
-if(box.clientWidth === 0) return;
-
-box.scrollTo({
-  left: box.clientWidth * i,
-  behavior: "smooth"
-});
-
-// update dots
-dots.forEach(d => d.classList.remove("active"));
-if (dots[i]) dots[i].classList.add("active");
-
-// update index
-tIndex = i;
-}
-   
-// DONE
-/* AUTO SLIDE */
-function startAuto() {
-clearInterval(tAuto);
-
-// safety check
-if (!Array.isArray(testimonials) || testimonials.length <= 1) return;
-
-tAuto = setInterval(() => {
-
-  // ensure index stays valid
-  tIndex = (tIndex + 1) % testimonials.length;
-
-  // safe call
-  if (typeof scrollTestimonial === "function") {
-    scrollTestimonial(tIndex);
-  }
-
-}, 4000);
-}
-   
-// DONE. 
-function restoreActiveView(){
-
-  let saved = localStorage.getItem("activeView") || "about";
-
-  // REMOVE ACTIVE FROM ALL BUTTONS
-  document.querySelectorAll(".category-btn").forEach(btn=>{
-    btn.classList.remove("active");
-  });
-
-  // HIDE ALL VIEWS
-  document.querySelectorAll(".view").forEach(v=>{
-    v.classList.remove("active-view");
-  });
-
-  // HOME / ABOUT DEFAULT
-  if(saved === "about"){
-
-    aboutView.classList.add("active-view");
-
-    let homeBtn = document.querySelector(".category-btn");
-
-    if(homeBtn){
-      homeBtn.classList.add("active");
-    }
-
-    return;
-  }
-
-  // OTHER CATEGORIES
-  let buttons = document.querySelectorAll(".category-btn");
-
-  buttons.forEach(btn=>{
-
-    if(btn.innerText.trim().toLowerCase() === saved){
-
-      showView(saved, btn);
-
-    }
-
-  });
-
-}
-
-   
-// Done
-  function initApp(){
-  loadCategoriesFromFirebase();
-  loadProductsFromFirebase();
-  loadTestimonialsFromFirebase();
-
-  setTimeout(()=>{
-    loadCategories();
-    restoreActiveView();
-  }, 200);
-} // ✅ CLOSE FUNCTION PROPERLY
-
-
- // DONE  
-async function loadProductsFromFirebase(){
-  products = [];
-
-  const querySnapshot = await fb.getDocs(fb.collection(db, "products"));
-
-  querySnapshot.forEach((docItem) => {
-    products.push({
-      id: docItem.id,
-      ...docItem.data()
-    });
-  });
-
-  // NEWEST FIRST
-  products.sort((a,b)=> b.date - a.date);
-
-  restoreActiveView();
-}
-   
-
-function loadTestimonialAdmin(){
-let box = document.getElementById("testimonialList");
-
-let html = "";
-
-testimonials.forEach((img,i)=>{
-html += `
-<div class="testimonial-item">
-  <img src="${img}">
-  <div style="flex:1">Testimonial ${i+1}</div>
-  <button class="delete-btn" onclick="deleteTestimonial(${i})">Delete</button>
-</div>`;
-});
-
-box.innerHTML = html;
-}
-    
-function uploadTestimonials(){
-alert("Uploading testimonial...");
-cloudinary.openUploadWidget({
-cloudName:"db92r6j9z",
-uploadPreset:"ummuhalti",
-multiple:true
-}, async (error, result) => {
-
-if(error) return;
-
-if(result && result.event === "success"){
-
-  await fb.addDoc(fb.collection(db, "testimonials"), {
-    url: result.info.secure_url
-  });
-
-  loadTestimonialsFromFirebase();
   loadTestimonialAdmin();
 }
 
-});
+function scrollTestimonial(i) {
+  const box = document.getElementById("testimonialCarousel");
+  const dots = document.querySelectorAll("#testimonialDots .dot");
+  if (!box || !dots.length) return;
+  tIndex = Math.max(0, Math.min(i, dots.length - 1));
+  box.scrollTo({ left: box.clientWidth * tIndex, behavior: "smooth" });
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[tIndex]?.classList.add("active");
 }
-async function addProduct(){
-  if(uploadedImages.length === 0){
-    alert("Upload images first");
-    return;
+
+function startAuto() {
+  clearInterval(tAuto);
+  if (testimonials.length <= 1) return;
+  tAuto = setInterval(() => scrollTestimonial((tIndex + 1) % testimonials.length), 4000);
+}
+
+function uploadTestimonials() {
+  if (typeof cloudinary === "undefined") return alert("Cloudinary is not loaded. Please refresh the page.");
+  cloudinary.openUploadWidget({
+    cloudName: "db92r6j9z", uploadPreset: "ummuhalti",
+    sources: ["local","camera"], multiple: true, resourceType: "image"
+  }, async (error, result) => {
+    if (error) { console.error(error); alert("Upload failed ❌"); return; }
+    if (result?.event === "success") {
+      try {
+        await fb.addDoc(fb.collection(db, "testimonials"), { url: result.info.secure_url, createdAt: Date.now() });
+        await loadTestimonialsFromFirebase();
+      } catch (saveError) {
+        console.error(saveError);
+        alert("Image uploaded but could not be saved ❌\n" + (saveError.code || saveError.message || ""));
+      }
+    }
+  });
+}
+
+function loadTestimonialAdmin() {
+  const box = document.getElementById("testimonialList");
+  if (!box) return;
+  box.innerHTML = testimonials.map((item, i) => `<div class="testimonial-item"><img src="${escapeAttr(item.url)}" alt=""><div style="flex:1">Testimonial ${i + 1}</div><button class="delete-btn" onclick="deleteTestimonial(${i})">Delete</button></div>`).join("");
+}
+
+async function deleteTestimonial(i) {
+  const item = testimonials[i];
+  if (!item || !confirm("Delete this testimonial?")) return;
+  try {
+    await fb.deleteDoc(fb.doc(db, "testimonials", item.id));
+    await loadTestimonialsFromFirebase();
+    alert("Testimonial deleted ✅");
+  } catch (error) {
+    console.error(error);
+    alert("Could not delete testimonial ❌");
   }
-
-  let newProduct = {
-    name: aName.value,
-    price: aPrice.value,
-    category: aCategory.value.toLowerCase(),
-    images: [...uploadedImages],
-    date: Date.now()
-  };
-
-  await fb.addDoc(fb.collection(db, "products"), newProduct);
-
-  uploadedImages = [];
-  aName.value = "";
-  aPrice.value = "";
-
-  alert("Product saved globally ✅");
-
-  loadProductsFromFirebase();
 }
 
-</script> 
-</body>
+function restoreActiveView() {
+  const saved = localStorage.getItem("bobTextileActiveView") || "about";
+  const exists = saved === "about" || categories.includes(saved);
+  showView(exists ? saved : "about", null);
+}
 
-</html>      
+function escapeHtml(value) {
+  return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+function escapeAttr(value) { return escapeHtml(value); }
+
+window.openAdmin = openAdmin;
+window.logoutAdmin = logoutAdmin;
+window.uploadMedia = uploadMedia;
+window.addProduct = addProduct;
+window.addCategory = addCategory;
+window.deleteCategory = deleteCategory;
+window.loadDelete = loadDelete;
+window.delProduct = delProduct;
+window.uploadTestimonials = uploadTestimonials;
+window.deleteTestimonial = deleteTestimonial;
+window.showView = showView;
+window.buyNow = buyNow;
+window.toggleVideoSound = toggleVideoSound;
+window.scrollTestimonial = scrollTestimonial;
+</script>
+</body>
+</html>
